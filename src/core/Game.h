@@ -8,9 +8,14 @@
 
 #include <SDL_video.h>
 #include <SDL_render.h>
+#include <vector>
+#include <memory>
+#include "Scene.h"
+
+class Scene;
 
 class Game {
-    bool initSDLImageModule();
+    bool initSDL_ImageModule();
 
     bool createRenderer();
 
@@ -18,10 +23,13 @@ class Game {
 
     bool initSDL();
 
+    bool initSDL_TTF_Module();
+
 protected:
     SDL_Window *window;
     SDL_Renderer *renderer;
     bool running;
+    Scene *scenes[1];
 
     virtual void initManagers();
 
@@ -34,11 +42,12 @@ public:
 
     virtual void update();
 
-    virtual void draw() = 0;
-
     void render();
 
     bool isRunning();
+
+    void exit();
+
 };
 
 

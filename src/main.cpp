@@ -1,12 +1,12 @@
 #include <SDL.h>
-#include "game/GameTicTacToe.h"
+#include "core/Game.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 int main(int argc, char *argv[]) {
-    GameTicTacToe game;
+    Game game;
 
     if(game.init(SCREEN_WIDTH,SCREEN_HEIGHT)){
         while (game.isRunning()){
@@ -14,9 +14,5 @@ int main(int argc, char *argv[]) {
             game.render();
         }
     }
-
-    //Quit SDL subsystems
-    SDL_Quit();
-
     return 0;
 }

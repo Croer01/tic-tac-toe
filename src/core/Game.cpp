@@ -6,9 +6,11 @@
 #include <SDL.h>
 #include <cstdio>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Game.h"
 #include "InputManager.h"
 #include "ImageManager.h"
+#include "../game/SceneTicTacToe.h"
 
 Game::Game() {
     window = NULL;
@@ -22,17 +24,25 @@ Game::~Game() {
     SDL_DestroyWindow(window);
     renderer = NULL;
     window = NULL;
+
+    //Quit SDL subsystems
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 //init region
 bool Game::init(int screenWidth, int screenHeight) {
     bool success = initSDL() &&
-           createWindow(screenWidth, screenHeight) &&
-           createRenderer() &&
-           initSDLImageModule();
+                   createWindow(screenWidth, screenHeight) &&
+                   createRenderer() &&
+                   initSDL_ImageModule() &&
+                   initSDL_TTF_Module();
 
     initManagers();
 
+    scenes[0] = new SceneTicTacToe(this, renderer);
+    scenes[0]->init();
     return success;
 }
 
@@ -72,7 +82,7 @@ bool Game::createRenderer() {
     return success;
 }
 
-bool Game::initSDLImageModule() {
+bool Game::initSDL_ImageModule() {
     bool success = true;
 
     //Initialize renderer color
@@ -88,6 +98,18 @@ bool Game::initSDLImageModule() {
     return success;
 }
 
+bool Game::initSDL_TTF_Module() {
+    bool success = true;
+
+    //Initialize SDL_ttf
+    if (TTF_Init() == -1) {
+        printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+
+    return success;
+}
+
 void Game::initManagers() {
     ImageManager::configManager(renderer);
 }
@@ -97,19 +119,26 @@ void Game::update() {
     InputManager::update();
 
     if (InputManager::quitPressed())
-        running = false;
+        exit();
 
+    scenes[0]->update();
 }
 
 void Game::render() {
 
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
-    draw();
+
+    scenes[0]->render();
+
     //Update screen
     SDL_RenderPresent(renderer);
 }
 
 bool Game::isRunning() {
     return running;
+}
+
+void Game::exit() {
+    running = false;
 }
