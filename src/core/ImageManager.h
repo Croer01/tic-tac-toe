@@ -7,10 +7,12 @@
 
 
 #include <map>
+#include <SDL_ttf.h>
 #include "Texture.h"
 
 class ImageManager {
     SDL_Renderer *renderer;
+    TTF_Font *font;
 
     //static
     static ImageManager *instance;
@@ -23,10 +25,13 @@ class ImageManager {
 
     Texture *instance_GetTextureByFileName(std::string filename);
 
+    Texture *instance_CreateTextureFromString(std::string text);
 public:
     static Texture *getTextureByFileName(std::string filename);
 
     static void configManager(SDL_Renderer *renderer);
+
+    static Texture *createTextureFromString(std::string text);
 };
 
 
