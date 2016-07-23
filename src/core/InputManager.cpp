@@ -27,7 +27,7 @@ bool InputManager::isKeyUp(SDL_Keycode keyCode) {
     return getInstance()->instance_IsKeyUp(keyCode);
 }
 
-bool InputManager::isKeyDown(int keyCode) {
+bool InputManager::isKeyDown(SDL_Keycode keyCode) {
     return getInstance()->instance_IsKeyDown(keyCode);
 }
 
@@ -115,7 +115,7 @@ bool InputManager::instance_IsKeyUp(SDL_Keycode keyCode) {
     return keyboardState[keyCode] == UP;
 }
 
-bool InputManager::instance_IsKeyDown(int keyCode) {
+bool InputManager::instance_IsKeyDown(SDL_Keycode keyCode) {
     return keyboardState[keyCode] == DOWN;
 }
 

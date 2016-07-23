@@ -44,7 +44,7 @@ class InputManager {
 
     bool instance_IsKeyUp(SDL_Keycode keyCode);
 
-    bool instance_IsKeyDown(int keyCode);
+    bool instance_IsKeyDown(SDL_Keycode keyCode);
 
     bool instance_IsMouseButtonUp(MOUSE_BUTTON mouseButton);
 
@@ -60,7 +60,7 @@ public:
 
     static bool isKeyUp(SDL_Keycode keyCode);
 
-    static bool isKeyDown(int keyCode);
+    static bool isKeyDown(SDL_Keycode keyCode);
 
     static bool isMouseButtonUp(MOUSE_BUTTON mouseButton);
 
