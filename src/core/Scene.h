@@ -12,9 +12,7 @@
 class Game;
 class Scene {
 protected:
-
     SDL_Renderer *renderer;
-
     Game *game;
 
 public:

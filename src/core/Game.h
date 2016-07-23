@@ -11,9 +11,10 @@
 #include <vector>
 #include <memory>
 #include "Scene.h"
+#include "SceneManager.h"
 
 class Scene;
-
+class SceneManager;
 class Game {
     bool initSDL_ImageModule();
 
@@ -29,7 +30,7 @@ protected:
     SDL_Window *window;
     SDL_Renderer *renderer;
     bool running;
-    Scene *scenes[1];
+    SceneManager *sceneManager;
 
     virtual void initManagers();
 
@@ -48,6 +49,9 @@ public:
 
     void exit();
 
+    bool changeScene(std::string sceneName);
+
+    void changeSceneInSafeMode();
 };
 
 

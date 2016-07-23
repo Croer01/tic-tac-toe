@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
         while (game.isRunning()){
             game.update();
             game.render();
+            game.changeSceneInSafeMode();
         }
     }
     return 0;

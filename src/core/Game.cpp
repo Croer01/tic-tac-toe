@@ -11,11 +11,13 @@
 #include "InputManager.h"
 #include "ImageManager.h"
 #include "../game/SceneTicTacToe.h"
+#include "../game/SceneMainMenu.h"
 
 Game::Game() {
     window = NULL;
     renderer = NULL;
     running = true;
+    sceneManager = new SceneManager();
 }
 
 Game::~Game() {
@@ -41,8 +43,11 @@ bool Game::init(int screenWidth, int screenHeight) {
 
     initManagers();
 
-    scenes[0] = new SceneTicTacToe(this, renderer);
-    scenes[0]->init();
+
+    sceneManager->registerScene("main Menu", new SceneMainMenu(this, renderer));
+    sceneManager->registerScene("main Game", new SceneTicTacToe(this, renderer));
+    if (success && (success = sceneManager->changeScene("main Menu")))
+        sceneManager->getCurrentScene()->init();
     return success;
 }
 
@@ -121,7 +126,7 @@ void Game::update() {
     if (InputManager::quitPressed())
         exit();
 
-    scenes[0]->update();
+    sceneManager->getCurrentScene()->update();
 }
 
 void Game::render() {
@@ -129,7 +134,7 @@ void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
-    scenes[0]->render();
+    sceneManager->getCurrentScene()->render();
 
     //Update screen
     SDL_RenderPresent(renderer);
@@ -142,3 +147,13 @@ bool Game::isRunning() {
 void Game::exit() {
     running = false;
 }
+
+bool Game::changeScene(std::string sceneName) {
+    return sceneManager->changeScene(sceneName);
+}
+
+void Game::changeSceneInSafeMode() {
+    sceneManager->initializeNextSceneInSafeMode();
+}
+
+
