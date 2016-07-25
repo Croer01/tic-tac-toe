@@ -5,19 +5,19 @@
 #include "SceneMainMenu.h"
 
 void SceneMainMenu::init() {
-    startText = new Text(renderer,{0,0,200,100});
+    startText = new Text(renderer, {0, 0, 200, 100});
     startText->setText("Start Game");
-    startText->addOnClickHandler([=](){
+    startText->addOnClickHandler([=]() {
         game->changeScene("main Game");
     });
 }
 
 void SceneMainMenu::update() {
-startText->update();
+    startText->update();
 }
 
 void SceneMainMenu::render() {
-startText->render();
+    startText->render();
 }
 
 

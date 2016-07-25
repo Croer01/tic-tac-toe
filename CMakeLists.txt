@@ -5,7 +5,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -static")
-set(SOURCE_FILES src/main.cpp src/core/Texture.cpp src/core/Texture.h src/game/TableBoard.cpp src/game/TableBoard.h src/game/SceneTicTacToe.cpp src/game/SceneTicTacToe.h src/core/Game.cpp src/core/Game.h src/core/InputManager.cpp src/core/InputManager.h src/game/Cell.cpp src/game/Cell.h src/core/ImageManager.cpp src/core/ImageManager.h src/core/Scene.cpp src/core/Scene.h src/game/SceneMainMenu.cpp src/game/SceneMainMenu.h src/ui/UIElement.h src/ui/Text.cpp src/ui/Text.h src/ui/UIElement.cpp src/core/SceneManager.cpp src/core/SceneManager.h)
+set(SOURCE_FILES src/main.cpp src/core/Texture.cpp src/core/Texture.h src/game/TableBoard.cpp src/game/TableBoard.h src/game/SceneTicTacToe.cpp src/game/SceneTicTacToe.h src/core/Game.cpp src/core/Game.h src/core/InputManager.cpp src/core/InputManager.h src/game/Cell.cpp src/game/Cell.h src/core/ImageManager.cpp src/core/ImageManager.h src/core/Scene.cpp src/core/Scene.h src/game/SceneMainMenu.cpp src/game/SceneMainMenu.h src/ui/UIElement.h src/ui/Text.cpp src/ui/Text.h src/ui/UIElement.cpp src/core/SceneManager.cpp src/core/SceneManager.h src/core/Logger.cpp src/core/Logger.h)
 
 #region sdl2 library
 set(SDL2_ROOT C:/cpp_libraries/SDL2)

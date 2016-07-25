@@ -46,7 +46,7 @@ Texture *ImageManager::instance_CreateTextureFromFileName(std::string filename) 
     //Load image at specified path
     SDL_Surface *loadedSurface = IMG_Load(filename.c_str());
     if (loadedSurface == NULL) {
-        printf("Unable to load image %s! SDL_image Error: %s\n", filename.c_str(), IMG_GetError());
+        SDL_LogError(SDL_LOG_CATEGORY_RENDER,"Unable to load image %s! SDL_image Error: %s\n", filename.c_str(), IMG_GetError());
     }
     else {
         //Color key image
@@ -57,12 +57,12 @@ Texture *ImageManager::instance_CreateTextureFromFileName(std::string filename) 
         //Create texture from surface pixels
         textureLoaded = SDL_CreateTextureFromSurface(renderer, loadedSurface);
         if (textureLoaded == NULL) {
-            printf("Unable to create texture from %s! SDL Error: %s\n", filename.c_str(), SDL_GetError());
+            SDL_LogError(SDL_LOG_CATEGORY_RENDER,"Unable to create texture from %s! SDL Error: %s\n", filename.c_str(), SDL_GetError());
         }
         else {
             //Get image dimensions
             texture = new Texture(textureLoaded, loadedSurface->w, loadedSurface->h);
-            printf("Texture \"%s\" loaded, dimensions: %d x %d\n", filename.c_str(), texture->getWidth(),
+            SDL_LogInfo(SDL_LOG_CATEGORY_RENDER,"Texture \"%s\" loaded, dimensions: %d x %d\n", filename.c_str(), texture->getWidth(),
                    texture->getHeight());
         }
 
@@ -83,7 +83,7 @@ Texture *ImageManager::instance_CreateTextureFromString(std::string text) {
     //Render text surface
     SDL_Surface *loadedSurface = TTF_RenderText_Blended(font, text.c_str(), {0, 0, 0});
     if (loadedSurface == NULL) {
-        printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+        SDL_LogError(SDL_LOG_CATEGORY_RENDER,"Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
     }
     else {
         SDL_Texture *textureLoaded = NULL;
@@ -91,7 +91,7 @@ Texture *ImageManager::instance_CreateTextureFromString(std::string text) {
         //Create texture from surface pixels
         textureLoaded = SDL_CreateTextureFromSurface(renderer, loadedSurface);
         if (textureLoaded == NULL) {
-            printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+            SDL_LogError(SDL_LOG_CATEGORY_RENDER,"Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
         }
         else {
             //Get image dimensions
