@@ -8,10 +8,11 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Game.h"
-#include "InputManager.h"
-#include "ImageManager.h"
 #include "../game/SceneTicTacToe.h"
 #include "../game/SceneMainMenu.h"
+#include "../services/GameServices.h"
+#include "../services/implementations/KeyboardInputService.h"
+#include "../services/implementations/SDLImageService.h"
 
 Game::Game() {
     window = NULL;
@@ -41,9 +42,9 @@ bool Game::init(int screenWidth, int screenHeight) {
                    initSDL_ImageModule() &&
                    initSDL_TTF_Module();
 
-    initManagers();
+    initGameServices();
 
-
+    //load scenes
     sceneManager->registerScene("main Menu", new SceneMainMenu(this, renderer));
     sceneManager->registerScene("main Game", new SceneTicTacToe(this, renderer));
     if (success && (success = sceneManager->changeScene("main Menu")))
@@ -115,15 +116,17 @@ bool Game::initSDL_TTF_Module() {
     return success;
 }
 
-void Game::initManagers() {
-    ImageManager::configManager(renderer);
+void Game::initGameServices() {
+    GameServices::initialize();
+    GameServices::provide(new KeyboardInputService());
+    GameServices::provide(new SDLImageService(renderer));
 }
 //endregion
 
 void Game::update() {
-    InputManager::update();
+    GameServices::getInput()->update();
 
-    if (InputManager::quitPressed())
+    if (GameServices::getInput()->quitPressed())
         exit();
 
     sceneManager->getCurrentScene()->update();

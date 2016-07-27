@@ -32,7 +32,7 @@ protected:
     bool running;
     SceneManager *sceneManager;
 
-    virtual void initManagers();
+    virtual void initGameServices();
 
 public:
     Game();

@@ -4,7 +4,7 @@
 
 
 #include "UIElement.h"
-#include "../core/InputManager.h"
+#include "../services/GameServices.h"
 
 UIElement::UIElement(SDL_Renderer *renderer, SDL_Rect bounds) {
     this->bounds = bounds;
@@ -12,8 +12,8 @@ UIElement::UIElement(SDL_Renderer *renderer, SDL_Rect bounds) {
 }
 
 void UIElement::update() {
-    if (InputManager::isMouseButtonDown(MOUSE_BUTTON::LEFT)) {
-        SDL_Point mousePos = InputManager::getMousePosition();
+    if (GameServices::getInput()->isMouseButtonDown(MOUSE_BUTTON::LEFT)) {
+        SDL_Point mousePos = GameServices::getInput()->getMousePosition();
         if (SDL_PointInRect(&mousePos, &bounds)) {
             clickEvent();
         }

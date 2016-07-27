@@ -3,7 +3,7 @@
 //
 
 #include "Text.h"
-#include "../core/ImageManager.h"
+#include "../services/GameServices.h"
 
 Text::Text(SDL_Renderer *renderer, SDL_Rect bounds) : UIElement(renderer, bounds) {
     contentText = "";
@@ -24,10 +24,9 @@ const std::string Text::getText() {
 }
 
 void Text::drawContentText() {
-    textToRender = ImageManager::createTextureFromString(contentText);
+    textToRender = GameServices::getImage()->createTextureFromString(contentText);
     textUpdated = false;
 }
-
 
 void Text::init() {
 

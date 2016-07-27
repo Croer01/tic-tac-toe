@@ -3,12 +3,12 @@
 //
 
 #include "Cell.h"
-#include "../core/ImageManager.h"
+#include "../services/GameServices.h"
 
 Cell::Cell(SDL_Renderer *renderer, SDL_Rect rect) {
     //textures
     this->renderer = renderer;
-    texture = ImageManager::getTextureByFileName("assets/images/tic-tac-toe.png");
+    texture = GameServices::getImage()->getTextureByFileName("assets/images/tic-tac-toe.png");
     imageClips[0] = {0, 0, texture->getWidth() / 2, texture->getHeight()};
     imageClips[1] = {texture->getWidth() / 2, 0, texture->getWidth() / 2, texture->getHeight()};
 

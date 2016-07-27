@@ -3,7 +3,7 @@
 //
 
 #include "TableBoard.h"
-#include "../core/InputManager.h"
+#include "../services/GameServices.h"
 
 TableBoard::TableBoard(int width, int height, SDL_Renderer *renderer) {
     this->width = width;
@@ -42,8 +42,8 @@ void TableBoard::draw() {
 }
 
 void TableBoard::update() {
-    if (InputManager::isMouseButtonDown(LEFT)) {
-        SDL_Point mousePos = InputManager::getMousePosition();
+    if (GameServices::getInput()->isMouseButtonDown(LEFT)) {
+        SDL_Point mousePos = GameServices::getInput()->getMousePosition();
         for (int i = 0; i < ROW_SIZE * ROW_SIZE; i++) {
             Cell *cell = cells[i];
             if (cell->getState() == UNCHECKED && SDL_PointInRect(&mousePos, cell)) {

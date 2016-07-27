@@ -3,11 +3,9 @@
 //
 
 #include <SDL_events.h>
-#include "InputManager.h"
+#include "KeyboardInputService.h"
 
-InputManager *InputManager::instance = NULL;
-
-InputManager::InputManager() {
+KeyboardInputService::KeyboardInputService() : InputService(){
     quit = false;
     mousePosition.x = -1;
     mousePosition.y = -1;
@@ -15,46 +13,7 @@ InputManager::InputManager() {
 
 //public accessors
 
-void InputManager::update() {
-    getInstance()->instance_Update();
-}
-
-bool InputManager::quitPressed() {
-    return getInstance()->instance_QuitPressed();
-}
-
-bool InputManager::isKeyUp(SDL_Keycode keyCode) {
-    return getInstance()->instance_IsKeyUp(keyCode);
-}
-
-bool InputManager::isKeyDown(SDL_Keycode keyCode) {
-    return getInstance()->instance_IsKeyDown(keyCode);
-}
-
-bool InputManager::isMouseButtonUp(MOUSE_BUTTON mouseButton) {
-    return getInstance()->instance_IsMouseButtonUp(mouseButton);
-}
-
-bool InputManager::isMouseButtonDown(MOUSE_BUTTON mouseButton) {
-    return getInstance()->instance_IsMouseButtonDown(mouseButton);
-}
-
-SDL_Point InputManager::getMousePosition() {
-    return getInstance()->instance_GetMousePosition();
-}
-
-//private implementations
-
-void InputManager::reset() {
-    for (std::pair<const int, InputManager::InputState> &iterator : keyboardState) {
-        iterator.second = NONE;
-    }
-    for (int i = 0; i < MOUSE_BUTTON::MAXBUTTON; ++i) {
-        mouseState[i] = NONE;
-    }
-}
-
-void InputManager::instance_Update() {
+void KeyboardInputService::update() {
     reset();
 
     SDL_Event event;
@@ -107,53 +66,38 @@ void InputManager::instance_Update() {
     }
 }
 
-bool InputManager::instance_QuitPressed() {
+bool KeyboardInputService::quitPressed() {
     return quit;
 }
 
-bool InputManager::instance_IsKeyUp(SDL_Keycode keyCode) {
+bool KeyboardInputService::isKeyUp(SDL_Keycode keyCode) {
     return keyboardState[keyCode] == UP;
 }
 
-bool InputManager::instance_IsKeyDown(SDL_Keycode keyCode) {
+bool KeyboardInputService::isKeyDown(SDL_Keycode keyCode) {
     return keyboardState[keyCode] == DOWN;
 }
 
-bool InputManager::instance_IsMouseButtonUp(MOUSE_BUTTON mouseButton) {
+bool KeyboardInputService::isMouseButtonUp(MOUSE_BUTTON mouseButton) {
     return mouseState[mouseButton] == UP;
 }
 
-bool InputManager::instance_IsMouseButtonDown(MOUSE_BUTTON mouseButton) {
+bool KeyboardInputService::isMouseButtonDown(MOUSE_BUTTON mouseButton) {
     return mouseState[mouseButton] == DOWN;
 }
 
-SDL_Point InputManager::instance_GetMousePosition() {
+SDL_Point KeyboardInputService::getMousePosition() {
     SDL_GetMouseState(&mousePosition.x, &mousePosition.y);
     return mousePosition;
 }
 
-InputManager *InputManager::getInstance() {
-    if (instance == NULL)
-        instance = new InputManager();
-    return instance;
+//private implementations
+
+void KeyboardInputService::reset() {
+    for (std::pair<const int, KeyboardInputService::InputState> &iterator : keyboardState) {
+        iterator.second = NONE;
+    }
+    for (int i = 0; i < MOUSE_BUTTON::MAX_BUTTON; ++i) {
+        mouseState[i] = NONE;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
