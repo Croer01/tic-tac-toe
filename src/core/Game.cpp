@@ -13,6 +13,7 @@
 #include "../services/GameServices.h"
 #include "../services/implementations/KeyboardInputService.h"
 #include "../services/implementations/SDLImageService.h"
+#include "../metadata-testing/SceneMetadata.h"
 
 Game::Game() {
     window = NULL;
@@ -47,7 +48,8 @@ bool Game::init(int screenWidth, int screenHeight) {
     //load scenes
     sceneManager->registerScene("main Menu", new SceneMainMenu(this, renderer));
     sceneManager->registerScene("main Game", new SceneTicTacToe(this, renderer));
-    if (success && (success = sceneManager->changeScene("main Menu")))
+    sceneManager->registerScene("Test", new SceneMetadata(this, renderer));
+    if (success && (success = sceneManager->changeScene("Test")))
         sceneManager->getCurrentScene()->init();
     return success;
 }
