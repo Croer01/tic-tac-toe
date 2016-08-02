@@ -4,6 +4,8 @@
 
 #include "Component.h"
 
+INIT_INSTANTIATOR(Component);
+
 Component::Component() {
     this->name = "default component";
 }

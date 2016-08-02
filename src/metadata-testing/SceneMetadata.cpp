@@ -4,18 +4,27 @@
 
 #include "SceneMetadata.h"
 #include "../core/game-objects/WorldElement.h"
+#include "../serialization/Serializer.h"
 
 #include <boost/archive/tmpdir.hpp>
 
 void SceneMetadata::init() {
-    WorldElement element("");
-    element.setName("awsome name");
-    element.addComponent(new Component());
-//    std::string filename(boost::archive::tmpdir());
-//    filename += "/demofile.txt";
-    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, boost::archive::tmpdir());
+    //directory
+    std::string filename(boost::archive::tmpdir());
+    filename += "\\demofile";
+    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "%s.yaml", filename.c_str());
 
-    Serializer::save<WorldElement>(&element);
+    //save element
+    WorldElement element("");
+    element.setName("awesome name");
+//    element.addComponent(new Component());
+    Serializer::save<WorldElement>(&element, filename);
+
+    //load element
+    WorldElement *elementLoaded = Serializer::load<WorldElement>(filename);
+//
+    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "loaded name: %s", elementLoaded->getName().c_str());
+
 }
 
 void SceneMetadata::update() {

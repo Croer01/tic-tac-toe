@@ -9,7 +9,11 @@
 #include "Element.h"
 
 class WorldElement : public Element{
+INSTANTIATOR(WorldElement);
 public:
+
+    WorldElement() : Element() {}
+
     WorldElement(const std::string &name);
 };
 

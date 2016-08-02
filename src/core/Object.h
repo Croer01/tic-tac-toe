@@ -5,12 +5,12 @@
 #ifndef TIC_TAC_TOE_OBJECT_H
 #define TIC_TAC_TOE_OBJECT_H
 
-#include <string>
+#include "../serialization/SerializerBase.h"
+#include "../serialization/Register.h"
 #include <yaml-cpp/yaml.h>
-#include "../serialization/ObjectMetadataSerialize.h"
-#include "../serialization/Serializer.h"
 
 class Object {
+INSTANTIATOR(Object);
 protected:
     std::string name;
 public:
@@ -25,5 +25,7 @@ public:
 };
 
 YAML_SERIALIZER(Object);
+
+
 
 #endif //TIC_TAC_TOE_OBJECT_H

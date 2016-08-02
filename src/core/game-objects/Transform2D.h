@@ -9,7 +9,9 @@
 #include <SDL_rect.h>
 #include "Component.h"
 
+
 class Transform2D : public Component {
+INSTANTIATOR(Transform2D);
 private:
     SDL_Point position;
     SDL_Point scale;

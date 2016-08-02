@@ -4,6 +4,8 @@
 
 #include "Transform2D.h"
 
+INIT_INSTANTIATOR(Transform2D);
+
 const SDL_Point &Transform2D::getPosition() const {
     return position;
 }

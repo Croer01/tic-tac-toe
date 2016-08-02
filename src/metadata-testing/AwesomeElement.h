@@ -9,9 +9,15 @@
 #include "../core/game-objects/WorldElement.h"
 
 class AwesomeElement : public WorldElement {
+INSTANTIATOR(AwesomeElement);
+
 public:
+
+    AwesomeElement() : WorldElement() { }
+
     AwesomeElement(const std::string &name) : WorldElement(name) { }
 };
 
+YAML_SERIALIZER(AwesomeElement);
 
 #endif //TIC_TAC_TOE_AWESOMEELEMENT_H

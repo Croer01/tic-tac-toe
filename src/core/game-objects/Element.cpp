@@ -4,6 +4,10 @@
 
 #include <algorithm>
 #include "Element.h"
+#include "../../serialization/Serializer.h"
+
+INIT_INSTANTIATOR(Element);
+
 Element::Element(std::string name) {
     this->name = name;
 }
@@ -33,7 +37,8 @@ bool Element::deserialize(YAML::Node node) {
     bool success = Object::deserialize(node);
     YAML::Node componentsSequence = node["components"];
     for (int i = 0; i < componentsSequence.size(); i++) {
-        components.push_back(Serializer::deserializeObject<Component>(componentsSequence[i]));
+        Component component = componentsSequence[i].as<Component>();
+        components.push_back(&component);
     }
 
     return success;

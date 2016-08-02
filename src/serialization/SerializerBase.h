@@ -5,6 +5,14 @@
 #ifndef TIC_TAC_TOE_REGISTERTOSERIALIZE_H
 #define TIC_TAC_TOE_REGISTERTOSERIALIZE_H
 
+#define INSTANTIATOR(className)\
+private:\
+static Serializer::Register<className> registration;
+
+
+#define INIT_INSTANTIATOR(className)\
+Serializer::Register<className> className::registration = Serializer::Register<className>();
+
 #define YAML_SERIALIZER(className) \
 namespace YAML {\
     template<>\
@@ -13,7 +21,8 @@ namespace YAML {\
             Node node;\
             int status;\
             std::string name= abi::__cxa_demangle(std::type_index(typeid(rhs)).name(), 0, 0, &status);\
-            rhs.serialize(node[name]);\
+            node["className"]=name;\
+            rhs.serialize(node);\
             return node;\
         }\
         static bool decode(const Node& node, className& rhs) {\

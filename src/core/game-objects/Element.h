@@ -11,9 +11,11 @@
 #include "../Object.h"
 
 class Element : public Object {
+INSTANTIATOR(Element);
 private:
     std::vector<Component *> components;
 public:
+    Element(){};
     Element(std::string name);
 
     Component *getComponent(std::string name);

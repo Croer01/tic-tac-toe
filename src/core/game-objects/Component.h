@@ -11,6 +11,7 @@
 #include "../Object.h"
 
 class Component : public Object {
+INSTANTIATOR(Component);
 public:
     Component();
 
