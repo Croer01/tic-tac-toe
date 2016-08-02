@@ -18,7 +18,7 @@ public:
     Element(){};
     Element(std::string name);
 
-    Component *getComponent(std::string name);
+    Component *getComponent(std::string componentName);
 
     void addComponent(Component *component);
 

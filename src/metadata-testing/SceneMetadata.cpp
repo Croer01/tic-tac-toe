@@ -17,13 +17,13 @@ void SceneMetadata::init() {
     //save element
     WorldElement element("");
     element.setName("awesome name");
-//    element.addComponent(new Component());
+    element.addComponent(new Component());
     Serializer::save<WorldElement>(&element, filename);
 
     //load element
     WorldElement *elementLoaded = Serializer::load<WorldElement>(filename);
-//
-    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "loaded name: %s", elementLoaded->getName().c_str());
+//    Serializer::save<WorldElement>(elementLoaded, filename);
+    SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "loaded name: %s", elementLoaded->getComponent("transform2D")->getName().c_str());
 
 }
 

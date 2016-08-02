@@ -7,12 +7,12 @@
 
 INIT_INSTANTIATOR(Object);
 
-void Object::serialize(YAML::Node node) const{
+void Object::serialize(YAML::Node node) const {
     node["name"] = name;
 }
 
 bool Object::deserialize(YAML::Node node) {
-    name=node["name"].as<std::string>();
+    name = node["name"].as<std::string>();
     return true;
 }
 

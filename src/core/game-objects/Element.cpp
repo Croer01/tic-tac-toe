@@ -12,10 +12,10 @@ Element::Element(std::string name) {
     this->name = name;
 }
 
-Component *Element::getComponent(std::string name) {
+Component *Element::getComponent(std::string componentName) {
     const std::vector<Component *>::iterator &iterator = std::find_if(components.begin(), components.end(),
-                                                                      [name](Component *component) {
-                                                                          return component->getName() == name;
+                                                                      [componentName](Component *component) {
+                                                                          return component->getName() == componentName;
                                                                       });
 
     return iterator != components.end() ? *iterator : NULL;
@@ -37,8 +37,8 @@ bool Element::deserialize(YAML::Node node) {
     bool success = Object::deserialize(node);
     YAML::Node componentsSequence = node["components"];
     for (int i = 0; i < componentsSequence.size(); i++) {
-        Component component = componentsSequence[i].as<Component>();
-        components.push_back(&component);
+        Component* component = (Component*)Serializer::Metadata::deserialize(componentsSequence[i]);
+        components.push_back(component);
     }
 
     return success;
