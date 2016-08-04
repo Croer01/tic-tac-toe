@@ -3,14 +3,36 @@
 //
 
 #include "SceneManager.h"
+#include "../serialization/Serializer.h"
 
-SceneManager::SceneManager() {
+#include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
+#include <SDL_filesystem.h>
+
+SceneManager::SceneManager(std::string scenePath) {
     currentScene = NULL;
     nextScene = NULL;
-}
 
-void SceneManager::registerScene(std::string name, Scene *scene) {
-    scenes[name] = scene;
+    if (!scenePath.empty()) {
+        namespace fs = boost::filesystem;
+
+        fs::path files(SDL_GetBasePath());
+        files /= scenePath;
+        if (!fs::exists(files)) {
+            SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "scenes path not found: %s", files.string().c_str());
+        }
+        else {
+            fs::recursive_directory_iterator end;
+
+            for (fs::recursive_directory_iterator i(files); i != end; ++i) {
+                fs::path path = *i;
+                Scene *sceneLoaded = Serializer::load<Scene>(path.string());
+                scenes[sceneLoaded->getName()] = sceneLoaded;
+            }
+
+            currentScene = scenes.begin()->second;
+        }
+    }
 }
 
 Scene *SceneManager::getCurrentScene() {
@@ -21,12 +43,7 @@ bool SceneManager::changeScene(std::string sceneName) {
     bool isChanged = false;
     auto search = scenes.find(sceneName);
     if (search != scenes.end()) {
-        if (currentScene == NULL) {
-            currentScene = search->second;
-        }
-        else {
-            nextScene = search->second;
-        }
+        nextScene = search->second;
         isChanged = true;
     }
 
@@ -40,5 +57,3 @@ void SceneManager::initializeNextSceneInSafeMode() {
         nextScene = NULL;
     }
 }
-
-

@@ -11,7 +11,7 @@
 
 
 class Transform2D : public Component {
-INSTANTIATOR(Transform2D);
+CREATE_METADATA(Transform2D);
 private:
     SDL_Point position;
     SDL_Point scale;
@@ -43,7 +43,5 @@ public:
 
 
 };
-
-YAML_SERIALIZER(Transform2D);
 
 #endif //TIC_TAC_TOE_TRANSFORM2D_H

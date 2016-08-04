@@ -32,7 +32,7 @@ set(BOOST_ROOT C:/cpp_libraries/boost_installation)
 
 set(Boost_USE_STATIC_LIBS OFF) # enable dynamic linking
 set(Boost_USE_MULTITHREAD ON)  # enable multithreading
-find_package(Boost 1.61.0 COMPONENTS system date_time REQUIRED)
+find_package(Boost 1.61.0 COMPONENTS system date_time filesystem REQUIRED)
 
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIR})

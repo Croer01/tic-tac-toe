@@ -4,8 +4,25 @@
 
 #include "Component.h"
 
-INIT_INSTANTIATOR(Component);
+INIT_METADATA(Component);
 
 Component::Component() {
     this->name = "default component";
 }
+
+void Component::init() {
+
+}
+
+void Component::update() {
+
+}
+
+void Component::render() {
+
+}
+
+
+
+
+

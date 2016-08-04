@@ -9,11 +9,13 @@
 #include "../core/Scene.h"
 #include "../ui/Text.h"
 
-class SceneMainMenu : public Scene {
+class SceneMainMenu {
+    SDL_Renderer *renderer;
+    Game* game;
     Text *startText;
 
 public:
-    SceneMainMenu(Game *game, SDL_Renderer *renderer) : Scene(game, renderer) { }
+    SceneMainMenu(Game *game, SDL_Renderer *renderer){};
 
     void init();
 

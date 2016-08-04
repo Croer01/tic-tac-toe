@@ -29,7 +29,7 @@ namespace Serializer {
             std::string className = abi::__cxa_demangle(typeIndex.name(), 0, 0, &status);
             instantiator newInstance = [](YAML::Node node){
                 T *object = new T();
-                YAML::convert<T>::decode(node,*object);
+                object->deserialize(node);
                 return  (Object*)object;
             };
 
@@ -40,6 +40,15 @@ namespace Serializer {
         static Object *deserialize(YAML::Node node) {
             std::string className= node["className"].as<std::string>();
             return instantiatorsByString[className](node);
+        }
+
+        template<typename T>
+        static YAML::Node serialize(T *object){
+            int status;
+            YAML::Node node;
+            node["className"]=abi::__cxa_demangle(std::type_index(typeid(*object)).name(), 0, 0, &status);
+            object->serialize(node);
+            return node;
         }
     };
 }

@@ -5,7 +5,7 @@
 #include "Object.h"
 
 
-INIT_INSTANTIATOR(Object);
+INIT_METADATA(Object);
 
 void Object::serialize(YAML::Node node) const {
     node["name"] = name;

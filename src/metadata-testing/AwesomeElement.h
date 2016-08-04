@@ -9,7 +9,7 @@
 #include "../core/game-objects/WorldElement.h"
 
 class AwesomeElement : public WorldElement {
-INSTANTIATOR(AwesomeElement);
+CREATE_METADATA(AwesomeElement);
 
 public:
 
@@ -17,7 +17,5 @@ public:
 
     AwesomeElement(const std::string &name) : WorldElement(name) { }
 };
-
-YAML_SERIALIZER(AwesomeElement);
 
 #endif //TIC_TAC_TOE_AWESOMEELEMENT_H

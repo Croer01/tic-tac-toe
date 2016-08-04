@@ -19,7 +19,7 @@ Game::Game() {
     window = NULL;
     renderer = NULL;
     running = true;
-    sceneManager = new SceneManager();
+    sceneManager = new SceneManager("Scenes");
 }
 
 Game::~Game() {
@@ -46,11 +46,7 @@ bool Game::init(int screenWidth, int screenHeight) {
     initGameServices();
 
     //load scenes
-    sceneManager->registerScene("main Menu", new SceneMainMenu(this, renderer));
-    sceneManager->registerScene("main Game", new SceneTicTacToe(this, renderer));
-    sceneManager->registerScene("Test", new SceneMetadata(this, renderer));
-    if (success && (success = sceneManager->changeScene("Test")))
-        sceneManager->getCurrentScene()->init();
+    sceneManager->getCurrentScene()->init();
     return success;
 }
 

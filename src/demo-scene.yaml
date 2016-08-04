@@ -1,0 +1,19 @@
+className: Scene
+name: test
+elements:
+  - className: WorldElement
+    name: awesome name
+    components:
+      - className: Transform2D
+        name: transform2D
+        position:
+          x: 0
+          y: 0
+        rotation:
+          x: 0
+          y: 0
+        scale:
+          x: 1
+          y: 1
+      - className: Component
+        name: default component

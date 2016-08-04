@@ -11,16 +11,19 @@
 #include "../Object.h"
 
 class Component : public Object {
-INSTANTIATOR(Component);
+CREATE_METADATA(Component);
 public:
     Component();
 
     inline virtual void setName(std::string name) const{
         SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "can't change component %s name", this->name.c_str());
     }
+
+    virtual void init();
+
+    virtual void update();
+
+    virtual void render();
 };
-
-YAML_SERIALIZER(Component);
-
 
 #endif //TIC_TAC_TOE_COMPONENT_H

@@ -22,7 +22,7 @@ void SceneMetadata::init() {
 
     //load element
     WorldElement *elementLoaded = Serializer::load<WorldElement>(filename);
-//    Serializer::save<WorldElement>(elementLoaded, filename);
+    Serializer::save<WorldElement>(elementLoaded, filename);
     SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "loaded name: %s", elementLoaded->getComponent("transform2D")->getName().c_str());
 
 }

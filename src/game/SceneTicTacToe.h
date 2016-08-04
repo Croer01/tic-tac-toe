@@ -11,19 +11,21 @@
 #include "TableBoard.h"
 #include "../core/Scene.h"
 
-class SceneTicTacToe : public Scene {
-
+class SceneTicTacToe {
+    Game* game;
     TableBoard *table;
+    SDL_Renderer *renderer;
 
 public:
 
-    SceneTicTacToe(Game *game, SDL_Renderer *renderer) : Scene(game, renderer) { }
+    SceneTicTacToe(Game *game, SDL_Renderer *renderer) { }
 
     void init();
 
     void update();
 
     void render();
+
 
 };
 

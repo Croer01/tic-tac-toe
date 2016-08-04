@@ -13,7 +13,7 @@
 namespace Serializer {
     template<typename T>
     void save(T *object, std::string fileName) {
-        YAML::Node node = YAML::convert<T>::encode(*object);
+        YAML::Node node = Metadata::serialize(object);
         std::ofstream fout(fileName + ".yaml");
         if (fout) {
             fout << node;
@@ -25,8 +25,8 @@ namespace Serializer {
 
 
     template<typename T>
-    T *load(std::string fileName) {
-        YAML::Node node = YAML::LoadFile(fileName + ".yaml");
+    T *load(std::string filePath) {
+        YAML::Node node = YAML::LoadFile(filePath);
         T *objectDeserializet = (T*) Metadata::deserialize(node);
         return objectDeserializet;
     };

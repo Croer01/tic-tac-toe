@@ -4,4 +4,4 @@
 
 #include "AwesomeElement.h"
 
-INIT_INSTANTIATOR(AwesomeElement);
+INIT_METADATA(AwesomeElement);

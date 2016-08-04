@@ -6,7 +6,7 @@
 #include "Element.h"
 #include "../../serialization/Serializer.h"
 
-INIT_INSTANTIATOR(Element);
+INIT_METADATA(Element);
 
 Element::Element(std::string name) {
     this->name = name;
@@ -28,7 +28,7 @@ void Element::addComponent(Component *component) {
 void Element::serialize(YAML::Node node) const {
     Object::serialize(node);
     for (Component *component : components) {
-        node["components"].push_back(*component);
+        node["components"].push_back(Serializer::Metadata::serialize(component));
     }
 
 }
@@ -37,9 +37,32 @@ bool Element::deserialize(YAML::Node node) {
     bool success = Object::deserialize(node);
     YAML::Node componentsSequence = node["components"];
     for (int i = 0; i < componentsSequence.size(); i++) {
-        Component* component = (Component*)Serializer::Metadata::deserialize(componentsSequence[i]);
+        Component *component = (Component *) Serializer::Metadata::deserialize(componentsSequence[i]);
         components.push_back(component);
     }
 
     return success;
 }
+
+void Element::init() {
+    for (Component *component : components) {
+        component->init();
+    }
+}
+
+void Element::update() {
+    for (Component *component : components) {
+        component->update();
+    }
+}
+
+void Element::render() {
+    for (Component *component : components) {
+        component->render();
+    }
+}
+
+
+
+
+

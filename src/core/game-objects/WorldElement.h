@@ -9,14 +9,12 @@
 #include "Element.h"
 
 class WorldElement : public Element{
-INSTANTIATOR(WorldElement);
+CREATE_METADATA(WorldElement);
 public:
 
     WorldElement() : Element() {}
 
     WorldElement(const std::string &name);
 };
-
-YAML_SERIALIZER(WorldElement);
 
 #endif //TIC_TAC_TOE_WORLDELEMENT_H

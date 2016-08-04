@@ -10,7 +10,7 @@
 #include <yaml-cpp/yaml.h>
 
 class Object {
-INSTANTIATOR(Object);
+CREATE_METADATA(Object);
 protected:
     std::string name;
 public:
@@ -23,9 +23,5 @@ public:
     virtual void serialize(YAML::Node node) const;
     virtual bool deserialize(YAML::Node node);
 };
-
-YAML_SERIALIZER(Object);
-
-
 
 #endif //TIC_TAC_TOE_OBJECT_H

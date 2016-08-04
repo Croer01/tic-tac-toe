@@ -16,9 +16,7 @@ class SceneManager {
     Scene *nextScene;
 
 public:
-    SceneManager();
-
-    void registerScene(std::string name, Scene *scene);
+    SceneManager(std::string scenePath);
 
     Scene *getCurrentScene();
 

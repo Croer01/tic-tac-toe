@@ -11,7 +11,7 @@
 #include "../Object.h"
 
 class Element : public Object {
-INSTANTIATOR(Element);
+CREATE_METADATA(Element);
 private:
     std::vector<Component *> components;
 public:
@@ -27,8 +27,11 @@ public:
     virtual bool deserialize(YAML::Node node);
 
 
-};
+    void init();
 
-YAML_SERIALIZER(Element);
+    void update();
+
+    void render();
+};
 
 #endif //TIC_TAC_TOE_ELEMENT_H
