@@ -14,7 +14,9 @@
 #include "SceneManager.h"
 
 class Scene;
+
 class SceneManager;
+
 class Game {
     bool initSDL_ImageModule();
 
@@ -25,6 +27,8 @@ class Game {
     bool initSDL();
 
     bool initSDL_TTF_Module();
+
+    bool initSceneManager();
 
 protected:
     SDL_Window *window;
@@ -52,6 +56,7 @@ public:
     bool changeScene(std::string sceneName);
 
     void changeSceneInSafeMode();
+
 };
 
 

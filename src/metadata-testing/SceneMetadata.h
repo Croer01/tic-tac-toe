@@ -9,11 +9,11 @@
 #include "../core/Game.h"
 #include "../core/Scene.h"
 
-class SceneMetadata : public Scene {
+class SceneMetadata {
 
 public:
 
-    SceneMetadata(Game *game, SDL_Renderer *renderer) : Scene(game, renderer) { }
+    SceneMetadata(Game *game, SDL_Renderer *renderer) { }
 
     void init();
 

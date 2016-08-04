@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "Element.h"
 #include "../../serialization/Serializer.h"
+#include "../Game.h"
 
 INIT_METADATA(Element);
 
@@ -44,7 +45,10 @@ bool Element::deserialize(YAML::Node node) {
     return success;
 }
 
-void Element::init() {
+void Element::init(Game *game,SDL_Renderer *renderer) {
+    this->game = game;
+    this->renderer = renderer;
+
     for (Component *component : components) {
         component->init();
     }
@@ -61,6 +65,10 @@ void Element::render() {
         component->render();
     }
 }
+
+
+
+
 
 
 

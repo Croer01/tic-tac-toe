@@ -8,7 +8,7 @@ const int SCREEN_HEIGHT = 480;
 
 int main(int argc, char *argv[]) {
     Game game;
-    Logger logger(SDL_LOG_PRIORITY_INFO);
+    Logger logger(SDL_LOG_PRIORITY_VERBOSE);
     logger.open("game.log");
     if (game.init(SCREEN_WIDTH, SCREEN_HEIGHT)) {
         while (game.isRunning()) {

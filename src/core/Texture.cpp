@@ -33,6 +33,7 @@ void Texture::draw(SDL_Renderer *renderer, SDL_Rect size, SDL_Rect clip, bool pr
     if(preserveAspect){
         size.w = clip.w/clip.h * size.h;
     }
+    if(renderer)
     SDL_RenderCopy(renderer, mTexture, &clip, &size);
 }
 

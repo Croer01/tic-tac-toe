@@ -9,13 +9,17 @@
 #include <vector>
 #include "Component.h"
 #include "../Object.h"
-
+#include "../Game.h"
+class Game;
 class Element : public Object {
 CREATE_METADATA(Element);
-private:
+protected:
     std::vector<Component *> components;
+    Game *game;
+    SDL_Renderer *renderer;
 public:
-    Element(){};
+    Element() { };
+
     Element(std::string name);
 
     Component *getComponent(std::string componentName);
@@ -27,11 +31,12 @@ public:
     virtual bool deserialize(YAML::Node node);
 
 
-    void init();
+    virtual void init(Game *game,SDL_Renderer *renderer);
 
-    void update();
+    virtual void update();
 
-    void render();
+    virtual void render();
+
 };
 
 #endif //TIC_TAC_TOE_ELEMENT_H

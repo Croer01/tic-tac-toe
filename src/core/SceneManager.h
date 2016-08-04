@@ -10,19 +10,30 @@
 #include "Scene.h"
 
 class Scene;
+class Game;
+
 class SceneManager {
     std::map<std::string, Scene *> scenes;
     Scene *currentScene;
     Scene *nextScene;
 
+    Game *game;
+    SDL_Renderer *renderer;
+
+    void addScene(Scene *scene);
+
 public:
-    SceneManager(std::string scenePath);
+    SceneManager(std::string scenePath, Game *game, SDL_Renderer *renderer);
 
     Scene *getCurrentScene();
 
     bool changeScene(std::string sceneName);
 
     void initializeNextSceneInSafeMode();
+
+    void update();
+
+    void render();
 };
 
 

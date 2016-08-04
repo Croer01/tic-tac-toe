@@ -19,7 +19,6 @@ Game::Game() {
     window = NULL;
     renderer = NULL;
     running = true;
-    sceneManager = new SceneManager("Scenes");
 }
 
 Game::~Game() {
@@ -41,12 +40,11 @@ bool Game::init(int screenWidth, int screenHeight) {
                    createWindow(screenWidth, screenHeight) &&
                    createRenderer() &&
                    initSDL_ImageModule() &&
-                   initSDL_TTF_Module();
+                   initSDL_TTF_Module() &&
+                   initSceneManager();
 
     initGameServices();
 
-    //load scenes
-    sceneManager->getCurrentScene()->init();
     return success;
 }
 
@@ -119,6 +117,14 @@ void Game::initGameServices() {
     GameServices::provide(new KeyboardInputService());
     GameServices::provide(new SDLImageService(renderer));
 }
+
+bool Game::initSceneManager() {
+    bool success = true;
+
+    sceneManager = new SceneManager("Scenes", this, renderer);
+
+    return success;
+}
 //endregion
 
 void Game::update() {
@@ -127,7 +133,7 @@ void Game::update() {
     if (GameServices::getInput()->quitPressed())
         exit();
 
-    sceneManager->getCurrentScene()->update();
+    sceneManager->update();
 }
 
 void Game::render() {
@@ -135,7 +141,7 @@ void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
-    sceneManager->getCurrentScene()->render();
+    sceneManager->render();
 
     //Update screen
     SDL_RenderPresent(renderer);

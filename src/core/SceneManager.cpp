@@ -9,7 +9,9 @@
 #include <boost/foreach.hpp>
 #include <SDL_filesystem.h>
 
-SceneManager::SceneManager(std::string scenePath) {
+SceneManager::SceneManager(std::string scenePath, Game *game, SDL_Renderer *renderer) {
+    this->game = game;
+    this->renderer = renderer;
     currentScene = NULL;
     nextScene = NULL;
 
@@ -27,10 +29,10 @@ SceneManager::SceneManager(std::string scenePath) {
             for (fs::recursive_directory_iterator i(files); i != end; ++i) {
                 fs::path path = *i;
                 Scene *sceneLoaded = Serializer::load<Scene>(path.string());
-                scenes[sceneLoaded->getName()] = sceneLoaded;
+                addScene(sceneLoaded);
             }
 
-            currentScene = scenes.begin()->second;
+            nextScene = scenes.begin()->second;
         }
     }
 }
@@ -53,7 +55,27 @@ bool SceneManager::changeScene(std::string sceneName) {
 void SceneManager::initializeNextSceneInSafeMode() {
     if (nextScene != NULL) {
         currentScene = nextScene;
-        currentScene->init();
+        currentScene->init(game,renderer);
         nextScene = NULL;
     }
 }
+
+void SceneManager::addScene(Scene *scene) {
+    scenes[scene->getName()] = scene;
+}
+
+void SceneManager::update() {
+if(currentScene != NULL)
+    currentScene->update();
+}
+
+void SceneManager::render() {
+    if(currentScene != NULL)
+        currentScene->render();
+}
+
+
+
+
+
+

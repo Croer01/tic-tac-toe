@@ -12,29 +12,22 @@
 #include "game-objects/Element.h"
 
 class Game;
+class Element;
 
 class Scene : public Object {
 CREATE_METADATA(Scene);
     std::vector<Element*> elements;
-protected:
-    SDL_Renderer *renderer;
-    Game *game;
 
+    void addElement(Element* element);
 public:
 
     Scene() { };
 
-    Scene(Game *game, SDL_Renderer *renderer);
+    void init(Game *game,SDL_Renderer *renderer);
 
-    virtual void init();
+    void update();
 
-    virtual void update();
-
-    virtual void render();
-
-    void setRenderer(SDL_Renderer *renderer);
-
-    void setGame(Game *game);
+    void render();
 
     virtual void serialize(YAML::Node node) const;
 

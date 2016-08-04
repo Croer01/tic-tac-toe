@@ -14,7 +14,7 @@ SDLImageService::SDLImageService(SDL_Renderer *renderer) : ImageService(){
 Texture * SDLImageService::getTextureByFileName(std::string filename) {
     Texture *texture = NULL;
 
-    auto iterator = textureLibrary.find(filename);
+    std::map<std::string, Texture *>::iterator iterator = textureLibrary.find(filename);
     if (iterator == textureLibrary.end()) {
         texture = createTextureFromFileName(filename);
         if (texture != NULL) {

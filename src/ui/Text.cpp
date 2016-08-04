@@ -5,6 +5,8 @@
 #include "Text.h"
 #include "../services/GameServices.h"
 
+INIT_METADATA(Text);
+
 Text::Text(SDL_Renderer *renderer, SDL_Rect bounds) : UIElement(renderer, bounds) {
     contentText = "";
 }
@@ -28,18 +30,24 @@ void Text::drawContentText() {
     textUpdated = false;
 }
 
-void Text::init() {
-
-}
-
-void Text::update(){
-    UIElement::update();
-}
-
 void Text::render() {
+    UIElement::render();
     if (textUpdated) {
         drawContentText();
     }
-    if(textToRender != NULL)
-    textToRender->draw(renderer, {bounds.x,bounds.y,textToRender->getWidth(),textToRender->getHeight()},bounds,true);
+    if (textToRender != NULL)
+        textToRender->draw(renderer, {bounds.x, bounds.y, textToRender->getWidth(), textToRender->getHeight()}, bounds,
+                           true);
+}
+
+void Text::serialize(YAML::Node node) const{
+    UIElement::serialize(node);
+    node["text"] = contentText;
+}
+
+bool Text::deserialize(YAML::Node node) {
+    bool success = UIElement::deserialize(node);
+    setText(node["text"].as<std::string>());
+
+    return success;
 }

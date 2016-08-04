@@ -9,27 +9,29 @@
 #include <SDL_rect.h>
 #include <SDL_render.h>
 #include <functional>
+#include "../core/game-objects/Element.h"
 
-class UIElement {
+class UIElement : public Element{
+CREATE_METADATA(UIElement);
 protected:
     SDL_Rect bounds;
-    SDL_Renderer *renderer;
     std::function<void()> onClickCallback;
 
     void clickEvent();
 
 public:
+    UIElement(): Element(){};
     UIElement(SDL_Renderer *renderer, SDL_Rect bounds);
 
-    virtual ~UIElement() { };
-
-    virtual void init() = 0;
+    void addOnClickHandler(std::function<void()> handler);
 
     virtual void update();
 
-    virtual void render() = 0;
+    virtual void serialize(YAML::Node node) const;
 
-    void addOnClickHandler(std::function<void()> handler);
+    virtual bool deserialize(YAML::Node node);
+
+
 };
 
 

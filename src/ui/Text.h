@@ -11,6 +11,8 @@
 #include "../core/Texture.h"
 
 class Text : public UIElement {
+    CREATE_METADATA(Text);
+
     std::string contentText;
     Texture *textToRender;
     bool textUpdated;
@@ -18,20 +20,21 @@ class Text : public UIElement {
     void drawContentText();
 
 public:
+    Text(): UIElement(){};
+
     Text(SDL_Renderer *renderer, SDL_Rect bounds);
 
     void setText(std::string text);
 
     const std::string getText();
 
-    //UIElement implementation
-    void render();
+    virtual void render();
 
-    ~Text();
+    virtual ~Text();
 
-    void init();
+    virtual void serialize(YAML::Node node) const;
 
-    void update();
+    virtual bool deserialize(YAML::Node node);
 
 
 };

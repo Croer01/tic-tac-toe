@@ -5,21 +5,6 @@
 #include "Scene.h"
 
 INIT_METADATA(Scene);
-
-Scene::Scene(Game *game, SDL_Renderer *renderer) {
-    this->renderer = renderer;
-    this->game = game;
-}
-
-
-void Scene::setRenderer(SDL_Renderer *renderer) {
-    Scene::renderer = renderer;
-}
-
-void Scene::setGame(Game *game) {
-    Scene::game = game;
-}
-
 void Scene::serialize(YAML::Node node) const {
     Object::serialize(node);
     for (Element *element: elements) {
@@ -31,16 +16,15 @@ bool Scene::deserialize(YAML::Node node) {
     bool success = Object::deserialize(node);
     YAML::Node elementsSequence = node["elements"];
     for (int i = 0; i < elementsSequence.size(); i++) {
-        Element* element = (Element*)Serializer::Metadata::deserialize(elementsSequence[i]);
-        elements.push_back(element);
+        addElement((Element*)Serializer::Metadata::deserialize(elementsSequence[i]));
     }
 
     return success;
 }
 
-void Scene::init() {
+void Scene::init(Game *game,SDL_Renderer *renderer) {
     for (Element *element: elements) {
-        element->init();
+        element->init(game,renderer);
     }
 }
 
@@ -54,6 +38,10 @@ void Scene::render() {
     for (Element *element: elements) {
         element->render();
     }
+}
+
+void Scene::addElement(Element *element) {
+    elements.push_back(element);
 }
 
 
