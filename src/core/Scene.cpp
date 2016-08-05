@@ -8,7 +8,7 @@ INIT_METADATA(Scene);
 void Scene::serialize(YAML::Node node) const {
     Object::serialize(node);
     for (Element *element: elements) {
-        node["elements"].push_back(Serializer::Metadata::serialize(element));
+        node["elements"].push_back(Metadata::serialize(element));
     }
 }
 
@@ -16,7 +16,7 @@ bool Scene::deserialize(YAML::Node node) {
     bool success = Object::deserialize(node);
     YAML::Node elementsSequence = node["elements"];
     for (int i = 0; i < elementsSequence.size(); i++) {
-        addElement((Element*)Serializer::Metadata::deserialize(elementsSequence[i]));
+        addElement((Element*)Metadata::deserialize(elementsSequence[i]));
     }
 
     return success;

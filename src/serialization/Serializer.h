@@ -10,24 +10,19 @@
 #include <iostream>
 #include "Metadata.h"
 
-namespace Serializer {
-    template<typename T>
-    void save(T *object, std::string fileName) {
-        YAML::Node node = Metadata::serialize(object);
-        std::ofstream fout(fileName + ".yaml");
-        if (fout) {
-            fout << node;
-            if (fout) {
-                fout.close();
-            }
-        }
-    };
+class Scene;
 
+class Serializer {
+    Serializer() { };
+    ~Serializer() { };
+public:
+    template<typename T>
+    static std::string save(T *object, std::string fileName);
 
     template<typename T>
-    T *load(std::string filePath) {
+    static T *load(std::string filePath) {
         YAML::Node node = YAML::LoadFile(filePath);
-        T *objectDeserializet = (T*) Metadata::deserialize(node);
+        T *objectDeserializet = (T *) Metadata::deserialize(node);
         return objectDeserializet;
     };
 };

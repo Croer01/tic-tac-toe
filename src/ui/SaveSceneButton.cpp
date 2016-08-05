@@ -6,6 +6,7 @@
 #include "SaveSceneButton.h"
 #include "../serialization/Serializer.h"
 
+
 INIT_METADATA(SaveSceneButton);
 
 void SaveSceneButton::init(Game *game, SDL_Renderer *renderer) {
@@ -14,7 +15,7 @@ void SaveSceneButton::init(Game *game, SDL_Renderer *renderer) {
     filename += "\\currentScene";
     addOnClickHandler([game,filename](){
         //save current scene
-        Serializer::save<Scene>(game->getCurrentScene(), filename);
-        SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION,"save current scene state on:%s.yaml", filename.c_str());
+        std::string fileSaved = Serializer::save<Scene>(game->getCurrentScene(), filename);
+        SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION,"save current scene state on:%s", fileSaved.c_str());
     });
 }

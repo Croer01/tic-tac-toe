@@ -29,7 +29,7 @@ void Element::addComponent(Component *component) {
 void Element::serialize(YAML::Node node) const {
     Object::serialize(node);
     for (Component *component : components) {
-        node["components"].push_back(Serializer::Metadata::serialize(component));
+        node["components"].push_back(Metadata::serialize(component));
     }
 
 }
@@ -38,7 +38,7 @@ bool Element::deserialize(YAML::Node node) {
     bool success = Object::deserialize(node);
     YAML::Node componentsSequence = node["components"];
     for (int i = 0; i < componentsSequence.size(); i++) {
-        Component *component = (Component *) Serializer::Metadata::deserialize(componentsSequence[i]);
+        Component *component = (Component *) Metadata::deserialize(componentsSequence[i]);
         components.push_back(component);
     }
 

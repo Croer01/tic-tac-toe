@@ -8,14 +8,14 @@
 
 #include "Metadata.h"
 
-namespace Serializer {
-    template<typename T>
-    class Register {
-    public:
-        Register() {
-            Serializer::Metadata::registerInstantiator<T>();
-        }
-    };
+
+template<typename T>
+class Register {
+public:
+    Register() {
+        Metadata::registerInstantiator<T>();
+    }
 };
+
 
 #endif //TIC_TAC_TOE_REGISTER_H
