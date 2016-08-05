@@ -1,0 +1,9 @@
+className: SaveSceneButton
+name: asdf
+components:
+text: Save current state
+bounds:
+  x: 440
+  y: 0
+  w: 200
+  h: 50

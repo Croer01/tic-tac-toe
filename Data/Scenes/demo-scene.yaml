@@ -17,3 +17,12 @@ elements:
           y: 1
       - className: Component
         name: default component
+  - className: Text
+    name: asdf
+    components:
+    text: Start Game
+    bounds:
+      x: 220
+      y: 190
+      w: 200
+      h: 100

@@ -10,14 +10,14 @@
 #include <SDL_render.h>
 #include <vector>
 #include <memory>
-#include "Scene.h"
 #include "SceneManager.h"
 
+class SceneManager;
+class Element;
 class Scene;
 
-class SceneManager;
-
 class Game {
+    Element* reset_button;
     bool initSDL_ImageModule();
 
     bool createRenderer();
@@ -57,6 +57,9 @@ public:
 
     void changeSceneInSafeMode();
 
+    void reloadScene();
+
+    Scene *getCurrentScene() const;
 };
 
 

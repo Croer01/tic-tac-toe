@@ -8,12 +8,10 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Game.h"
-#include "../game/SceneTicTacToe.h"
-#include "../game/SceneMainMenu.h"
 #include "../services/GameServices.h"
 #include "../services/implementations/KeyboardInputService.h"
 #include "../services/implementations/SDLImageService.h"
-#include "../metadata-testing/SceneMetadata.h"
+#include "../serialization/Serializer.h"
 
 Game::Game() {
     window = NULL;
@@ -45,6 +43,8 @@ bool Game::init(int screenWidth, int screenHeight) {
 
     initGameServices();
 
+    reset_button = Serializer::load<Element>(std::string(SDL_GetBasePath()) + "/Data/save_button.yaml");
+    reset_button->init(this, renderer);
     return success;
 }
 
@@ -121,7 +121,7 @@ void Game::initGameServices() {
 bool Game::initSceneManager() {
     bool success = true;
 
-    sceneManager = new SceneManager("Scenes", this, renderer);
+    sceneManager = new SceneManager("Data/Scenes", this, renderer);
 
     return success;
 }
@@ -134,6 +134,7 @@ void Game::update() {
         exit();
 
     sceneManager->update();
+    reset_button->update();
 }
 
 void Game::render() {
@@ -142,7 +143,7 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     sceneManager->render();
-
+    reset_button->render();
     //Update screen
     SDL_RenderPresent(renderer);
 }
@@ -162,5 +163,17 @@ bool Game::changeScene(std::string sceneName) {
 void Game::changeSceneInSafeMode() {
     sceneManager->initializeNextSceneInSafeMode();
 }
+
+void Game::reloadScene() {
+    sceneManager->changeScene(sceneManager->getCurrentScene()->getName());
+}
+
+Scene *Game::getCurrentScene() const {
+    return sceneManager->getCurrentScene();
+}
+
+
+
+
 
 
