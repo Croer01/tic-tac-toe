@@ -9,12 +9,14 @@
 #include <SDL_rect.h>
 #include <SDL_render.h>
 #include <functional>
-#include "../core/game-objects/Element.h"
+#include "../game-objects/elements/Element.h"
+#include "../game-objects/components/Transform2D.h"
 
 class UIElement : public Element{
 CREATE_METADATA(UIElement);
 protected:
-    SDL_Rect bounds;
+    Transform2D *transform;
+
     std::function<void()> onClickCallback;
 
     void clickEvent();

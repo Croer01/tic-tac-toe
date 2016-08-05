@@ -9,7 +9,7 @@
 #include <SDL_render.h>
 #include "Game.h"
 #include "Object.h"
-#include "game-objects/Element.h"
+#include "../game-objects/elements/Element.h"
 
 class Game;
 class Element;

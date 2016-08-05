@@ -8,7 +8,7 @@
 
 #include <SDL_log.h>
 #include <string>
-#include "../Object.h"
+#include "../../core/Object.h"
 
 class Component : public Object {
 CREATE_METADATA(Component);

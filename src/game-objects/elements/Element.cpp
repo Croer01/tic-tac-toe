@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "Element.h"
 #include "../../serialization/Serializer.h"
-#include "../Game.h"
+#include "../../core/Game.h"
 
 INIT_METADATA(Element);
 
@@ -13,8 +13,8 @@ Element::Element(std::string name) {
     this->name = name;
 }
 
-Component *Element::getComponent(std::string componentName) {
-    const std::vector<Component *>::iterator &iterator = std::find_if(components.begin(), components.end(),
+Component *Element::getComponent(std::string componentName) const{
+    auto iterator = std::find_if(components.begin(), components.end(),
                                                                       [componentName](Component *component) {
                                                                           return component->getName() == componentName;
                                                                       });

@@ -36,7 +36,6 @@ public:
 
     virtual bool deserialize(YAML::Node node);
 
-
 };
 
 

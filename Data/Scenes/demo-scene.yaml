@@ -12,7 +12,7 @@ elements:
         rotation:
           x: 0
           y: 0
-        scale:
+        size:
           x: 1
           y: 1
       - className: Component
@@ -20,9 +20,15 @@ elements:
   - className: Text
     name: asdf
     components:
+      - className: Transform2D
+        name: transform2D
+        position:
+          x: 220
+          y: 190
+        rotation:
+          x: 0
+          y: 0
+        size:
+          x: 200
+          y: 100
     text: Start Game
-    bounds:
-      x: 220
-      y: 190
-      w: 200
-      h: 100

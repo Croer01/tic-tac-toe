@@ -1,9 +1,15 @@
 className: SaveSceneButton
 name: asdf
-components:
 text: Save current state
-bounds:
-  x: 440
-  y: 0
-  w: 200
-  h: 50
+components:
+  - className: Transform2D
+    name: transform2D
+    position:
+      x: 440
+      y: 0
+    rotation:
+      x: 0
+      y: 0
+    size:
+      x: 200
+      y: 50

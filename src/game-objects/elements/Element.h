@@ -7,9 +7,10 @@
 
 
 #include <vector>
-#include "Component.h"
-#include "../Object.h"
-#include "../Game.h"
+#include "../../core/Object.h"
+#include "../../core/Game.h"
+#include "../components/Component.h"
+
 class Game;
 class Element : public Object {
 CREATE_METADATA(Element);
@@ -18,11 +19,11 @@ protected:
     Game *game;
     SDL_Renderer *renderer;
 public:
-    Element() { };
+    Element() :Object(){ };
 
     Element(std::string name);
 
-    Component *getComponent(std::string componentName);
+    Component *getComponent(std::string componentName) const;
 
     void addComponent(Component *component);
 

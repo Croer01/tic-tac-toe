@@ -14,7 +14,7 @@ class Transform2D : public Component {
 CREATE_METADATA(Transform2D);
 private:
     SDL_Point position;
-    SDL_Point scale;
+    SDL_Point size;
     SDL_Point rotation;
 public:
     Transform2D();
@@ -22,15 +22,15 @@ public:
     //region getters_setters
     const SDL_Point &getPosition() const;
 
-    void setPosition(const SDL_Point &position);
+    void setPosition(SDL_Point position);
 
     const SDL_Point &getScale() const;
 
-    void setScale(const SDL_Point &scale);
+    void setSize(SDL_Point scale);
 
     const SDL_Point &getRotation() const;
 
-    void setRotation(const SDL_Point &rotation);
+    void setRotation(SDL_Point rotation);
     //endregion
 
     void move(const SDL_Point &movement);
@@ -42,6 +42,7 @@ public:
     virtual bool deserialize(YAML::Node node);
 
 
+    const SDL_Rect getRect();
 };
 
 #endif //TIC_TAC_TOE_TRANSFORM2D_H

@@ -36,7 +36,7 @@ void Text::render() {
         drawContentText();
     }
     if (textToRender != NULL)
-        textToRender->draw(renderer, bounds);
+        textToRender->draw(renderer, transform->getRect());
 }
 
 void Text::serialize(YAML::Node node) const{
