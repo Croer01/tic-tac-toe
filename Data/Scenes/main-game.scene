@@ -1,9 +1,9 @@
 className: Scene
-name: main Menu
+name: main Game
 elements:
   - className: Button
     name: asdf
-    text: Start Game
+    text: Return main menu
     components:
       - className: Transform2D
         name: transform2D
@@ -18,4 +18,4 @@ elements:
           y: 100
       - className: GoToScene
         name: goToScene
-        sceneName: main Game
+        sceneName: main Menu
