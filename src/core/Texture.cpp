@@ -27,8 +27,6 @@ int Texture::getHeight() {
 
 void Texture::draw(SDL_Renderer *renderer, SDL_Rect size) {
     SDL_RenderCopy(renderer, mTexture, NULL, &size);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(renderer,&size);
 }
 
 void Texture::draw(SDL_Renderer *renderer, SDL_Rect size, SDL_Rect clip, bool preserveAspect) {
