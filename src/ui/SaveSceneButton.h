@@ -6,12 +6,12 @@
 #define TIC_TAC_TOE_RESETBUTTON_H
 
 
-#include "Text.h"
+#include "Button.h"
 
-class SaveSceneButton : public Text{
+class SaveSceneButton : public Button{
     CREATE_METADATA(SaveSceneButton);
 public:
-    SaveSceneButton() : Text(){};
+    SaveSceneButton() : Button(){};
 
     virtual void init(Game *game, SDL_Renderer *renderer);
 };

@@ -8,7 +8,6 @@
 
 #include <SDL_rect.h>
 #include <SDL_render.h>
-#include <functional>
 #include "../game-objects/elements/Element.h"
 #include "../game-objects/components/Transform2D.h"
 
@@ -16,18 +15,9 @@ class UIElement : public Element{
 CREATE_METADATA(UIElement);
 protected:
     Transform2D *transform;
-
-    std::function<void()> onClickCallback;
-
-    void clickEvent();
-
 public:
     UIElement(): Element(){};
     UIElement(SDL_Renderer *renderer, SDL_Rect bounds);
-
-    void addOnClickHandler(std::function<void()> handler);
-
-    virtual void update();
 
     virtual void serialize(YAML::Node node) const;
 

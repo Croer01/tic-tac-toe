@@ -3,22 +3,16 @@
 //
 #include "GameServices.h"
 
-ImageService *GameServices::imageService = NULL;
-InputService *GameServices::inputService = NULL;
-NullImageService GameServices::nullImageService;
-NullInputService GameServices::nullInputService;
-
-void GameServices::initialize() {
-    imageService = &nullImageService;
-    inputService = &nullInputService;
-}
+ImageService *GameServices::imageService = new NullImageService();
+InputService *GameServices::inputService = new NullInputService();
+CursorService *GameServices::cursorService = new NullCursorService();
 
 void GameServices::provide(ImageService *service) {
     if(service != NULL){
         imageService = service;
     }
     else{
-        imageService = &nullImageService;
+        imageService = new NullImageService();
     }
 }
 
@@ -27,7 +21,16 @@ void GameServices::provide(InputService *service) {
         inputService = service;
     }
     else{
-        inputService = &nullInputService;
+        inputService = new NullInputService();
+    }
+}
+
+void GameServices::provide(CursorService *service){
+    if(service != NULL){
+        cursorService = service;
+    }
+    else{
+        cursorService = new NullCursorService();
     }
 }
 
@@ -37,6 +40,10 @@ ImageService *GameServices::getImage() {
 
 InputService *GameServices::getInput() {
     return inputService;
+}
+
+CursorService *GameServices::getCursor() {
+    return cursorService;
 }
 
 

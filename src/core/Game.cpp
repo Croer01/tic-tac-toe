@@ -11,6 +11,7 @@
 #include "../services/GameServices.h"
 #include "../services/implementations/KeyboardInputService.h"
 #include "../services/implementations/SDLImageService.h"
+#include "../services/implementations/SDLCursorService.h"
 #include "../serialization/Serializer.h"
 
 Game::Game() {
@@ -113,9 +114,9 @@ bool Game::initSDL_TTF_Module() {
 }
 
 void Game::initGameServices() {
-    GameServices::initialize();
     GameServices::provide(new KeyboardInputService());
     GameServices::provide(new SDLImageService(renderer));
+    GameServices::provide(new SDLCursorService());
 }
 
 bool Game::initSceneManager() {

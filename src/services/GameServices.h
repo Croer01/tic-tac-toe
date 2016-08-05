@@ -5,29 +5,28 @@
 #ifndef SDL_HELLO_WORLD_GAMESERVICES_H
 #define SDL_HELLO_WORLD_GAMESERVICES_H
 
-
-#include "ImageService.h"
-#include "InputService.h"
 #include "null-services/NullImageService.h"
 #include "null-services/NullInputService.h"
+#include "null-services/NullCursorService.h"
 
 class GameServices {
 private:
     static ImageService *imageService;
     static InputService *inputService;
-    static NullImageService nullImageService;
-    static NullInputService nullInputService;
+    static CursorService *cursorService;
 
 public:
-    static void initialize();
+    static void provide(ImageService *service);
 
-    static void provide(ImageService *imageService);
+    static void provide(InputService *service);
 
-    static void provide(InputService *inputService);
+    static void provide(CursorService *service);
 
     static ImageService *getImage();
 
     static InputService *getInput();
+
+    static CursorService *getCursor();
 };
 
 
