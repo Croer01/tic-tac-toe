@@ -10,13 +10,20 @@
 #include <string>
 #include "../../core/Object.h"
 
+class Element;
 class Component : public Object {
 CREATE_METADATA(Component);
+protected:
+    Element* element;
 public:
     Component();
 
     inline virtual void setName(std::string name) const{
         SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "can't change component %s name", this->name.c_str());
+    }
+
+    inline void setElement(Element *element){
+        this->element = element;
     }
 
     virtual void init();

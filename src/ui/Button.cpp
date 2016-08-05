@@ -5,6 +5,8 @@
 #include "Button.h"
 #include "../services/GameServices.h"
 
+INIT_METADATA(Button);
+
 Button::Button() : Text() {
     isInside = false;
 }

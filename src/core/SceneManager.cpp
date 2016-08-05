@@ -47,6 +47,8 @@ bool SceneManager::changeScene(std::string sceneName) {
     if (search != scenes.end()) {
         nextScene = search->second;
         isChanged = true;
+    }else{
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "scenes \"%s\" not exist", sceneName.c_str());
     }
 
     return isChanged;

@@ -39,6 +39,7 @@ bool Element::deserialize(YAML::Node node) {
     YAML::Node componentsSequence = node["components"];
     for (int i = 0; i < componentsSequence.size(); i++) {
         Component *component = (Component *) Metadata::deserialize(componentsSequence[i]);
+        component->setElement(this);
         components.push_back(component);
     }
 

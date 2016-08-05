@@ -11,7 +11,9 @@
 #include <SDL_mouse.h>
 
 class Button : public Text {
-bool isInside;
+CREATE_METADATA(Button);
+
+    bool isInside;
 protected:
     std::function<void()> onClickCallback;
 
