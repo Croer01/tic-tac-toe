@@ -10,7 +10,7 @@ INIT_METADATA(GoToScene);
 
 void GoToScene::init() {
     Component::init();
-    Button *button = (Button *) element;
+    Button *button = (Button *) element->getComponent("button");
     button->addOnClickHandler([=]() {
         GameServices::getScenes()->changeScene(sceneName);
     });

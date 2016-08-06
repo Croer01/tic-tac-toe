@@ -150,10 +150,3 @@ bool Game::isRunning() {
 void Game::exit() {
     running = false;
 }
-
-
-
-
-
-
-

@@ -1,6 +1,5 @@
-className: SaveSceneButton
-name: asdf
-text: Save current state
+className: WorldElement
+name: saveButton
 components:
   - className: Transform2D
     name: transform2D
@@ -13,3 +12,6 @@ components:
     size:
       x: 200
       y: 50
+  - className: SaveSceneButton
+    name: saveSceneButton
+    text: Save current state

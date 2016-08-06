@@ -66,7 +66,6 @@ void Element::render() {
     }
 }
 
-
 Transform2D *Element::getTransform() const {
     return transform;
 }
