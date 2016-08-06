@@ -9,8 +9,8 @@
 #include <SDL_log.h>
 #include <string>
 #include "../../core/Object.h"
+#include "../elements/Element.h"
 
-class Element;
 class Component : public Object {
 CREATE_METADATA(Component);
 protected:

@@ -4,18 +4,10 @@
 
 #include "TableBoard.h"
 #include "../services/GameServices.h"
+#include "../game-objects/elements/Element.h"
+#include "../game-objects/elements/WorldElement.h"
 
-TableBoard::TableBoard(int width, int height, SDL_Renderer *renderer) {
-    this->width = width;
-    this->height = height;
-    this->renderer = renderer;
-    player = 0;
-    initCells(width, height);
-}
-
-TableBoard::~TableBoard() {
-    renderer = NULL;
-}
+INIT_METADATA(TableBoard);
 
 
 void TableBoard::initCells(int screenWith, int screenHeight) {
@@ -30,31 +22,7 @@ void TableBoard::initCells(int screenWith, int screenHeight) {
             rect.y = i * cellHeight;
             rect.w = cellWidth;
             rect.h = cellHeight;
-            cells[i * ROW_SIZE + j] = new Cell(renderer, rect);
-        }
-    }
-}
-
-void TableBoard::draw() {
-    for (int i = 0; i < ROW_SIZE * ROW_SIZE; i++) {
-        cells[i]->draw();
-    }
-}
-
-void TableBoard::update() {
-    if (GameServices::getInput()->isMouseButtonDown(LEFT)) {
-        SDL_Point mousePos = GameServices::getInput()->getMousePosition();
-        for (int i = 0; i < ROW_SIZE * ROW_SIZE; i++) {
-            Cell *cell = cells[i];
-            if (cell->getState() == UNCHECKED && SDL_PointInRect(&mousePos, cell)) {
-                if (player == 0) {
-                    cell->checkPlayerOne();
-                } else if (player == 1) {
-                    cell->checkPlayerTwo();
-                }
-                togglePlayers();
-                break;
-            }
+            cells[i * ROW_SIZE + j] = new Cell(rect);
         }
     }
 }
@@ -102,5 +70,38 @@ int TableBoard::checkGameEnds() {
 }
 
 
+void TableBoard::init() {
+    Component::init();
+    player = 0;
+    Transform2D* transform= ((WorldElement*)element)->getTransform();
+    initCells(transform->getSize().x, transform->getSize().y);
+}
 
+void TableBoard::update() {
+    Component::update();
+    if (GameServices::getInput()->isMouseButtonDown(LEFT)) {
+        SDL_Point mousePos = GameServices::getInput()->getMousePosition();
+        for (int i = 0; i < ROW_SIZE * ROW_SIZE; i++) {
+            Cell *cell = cells[i];
+            if (cell->getState() == UNCHECKED && SDL_PointInRect(&mousePos, cell)) {
+                if (player == 0) {
+                    cell->checkPlayerOne();
+                } else if (player == 1) {
+                    cell->checkPlayerTwo();
+                }
+                togglePlayers();
+                break;
+            }
+        }
+    }
 
+    if(checkGameEnds() != 0)
+        GameServices::getScenes()->changeScene("main Menu");
+}
+
+void TableBoard::render() {
+    Component::render();
+    for (int i = 0; i < ROW_SIZE * ROW_SIZE; i++) {
+        cells[i]->draw();
+    }
+}

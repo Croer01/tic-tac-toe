@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include "../core/Texture.h"
+#include "../../core/Texture.h"
 
 class ImageService {
 public:

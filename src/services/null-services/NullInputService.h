@@ -7,7 +7,7 @@
 
 
 #include <SDL_rect.h>
-#include "../InputService.h"
+#include "../interfaces/InputService.h"
 
 class NullInputService : public InputService{
 public:

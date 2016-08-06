@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include "core/Game.h"
 #include "core/Logger.h"
+#include "services/GameServices.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -14,7 +15,7 @@ int main(int argc, char *argv[]) {
         while (game.isRunning()) {
             game.update();
             game.render();
-            game.changeSceneInSafeMode();
+            GameServices::getScenes()->initializeNextSceneInSafeMode();
         }
     }
     logger.close();

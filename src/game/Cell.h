@@ -16,14 +16,13 @@ enum CELL_STATE{
 };
 
 class Cell : public SDL_Rect {
-    SDL_Renderer* renderer;
     Texture* texture;
     SDL_Rect imageClips[2];
     CELL_STATE state;
 
 public:
 
-    Cell(SDL_Renderer *renderer, SDL_Rect rect);
+    Cell(SDL_Rect rect);
     void draw();
     void checkPlayerOne();
     void checkPlayerTwo();

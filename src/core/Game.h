@@ -10,9 +10,9 @@
 #include <SDL_render.h>
 #include <vector>
 #include <memory>
-#include "SceneManager.h"
+#include "../services/implementations/SceneServiceImpl.h"
 
-class SceneManager;
+class SceneServiceImpl;
 class Element;
 class Scene;
 
@@ -28,13 +28,10 @@ class Game {
 
     bool initSDL_TTF_Module();
 
-    bool initSceneManager();
-
 protected:
     SDL_Window *window;
     SDL_Renderer *renderer;
     bool running;
-    SceneManager *sceneManager;
 
     virtual void initGameServices();
 
@@ -52,14 +49,6 @@ public:
     bool isRunning();
 
     void exit();
-
-    bool changeScene(std::string sceneName);
-
-    void changeSceneInSafeMode();
-
-    void reloadScene();
-
-    Scene *getCurrentScene() const;
 };
 
 

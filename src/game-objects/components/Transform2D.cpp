@@ -14,7 +14,7 @@ void Transform2D::setPosition(SDL_Point position) {
     this->position = position;
 }
 
-const SDL_Point &Transform2D::getScale() const {
+const SDL_Point &Transform2D::getSize() const {
     return size;
 }
 

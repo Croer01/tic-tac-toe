@@ -13,7 +13,7 @@ class SaveSceneButton : public Button{
 public:
     SaveSceneButton() : Button(){};
 
-    virtual void init(Game *game, SDL_Renderer *renderer);
+    virtual void init();
 };
 
 

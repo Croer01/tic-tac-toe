@@ -2,16 +2,16 @@
 // Created by Adria on 05/08/2016.
 //
 
-#include "SDLCursorService.h"
+#include "SDLCursorServiceImpl.h"
 
-SDLCursorService::~SDLCursorService() {
+SDLCursorServiceImpl::~SDLCursorServiceImpl() {
     for (auto cursor: cursors) {
         SDL_FreeCursor(cursor.second);
     }
     cursors.clear();
 }
 
-void SDLCursorService::setCursor(SDL_SystemCursor cursor) {
+void SDLCursorServiceImpl::setCursor(SDL_SystemCursor cursor) {
     SDL_Cursor *pointer = NULL;
     auto iterator = cursors.find(cursor);
     if (iterator != cursors.end()) {

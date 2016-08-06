@@ -9,17 +9,18 @@
 #include "Element.h"
 #include "../components/Transform2D.h"
 
-class WorldElement : public Element{
+class WorldElement : public Element {
 CREATE_METADATA(WorldElement);
     Transform2D *transform;
 public:
 
-    WorldElement() : Element() {}
+    WorldElement() : Element() { }
 
     WorldElement(const std::string &name);
 
-    virtual bool deserialize(YAML::Node node);
+    Transform2D *getTransform();
 
+    virtual bool deserialize(YAML::Node node);
 
 };
 

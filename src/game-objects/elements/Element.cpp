@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "Element.h"
 #include "../../serialization/Serializer.h"
-#include "../../core/Game.h"
+#include "../components/Transform2D.h"
 
 INIT_METADATA(Element);
 
@@ -43,13 +43,12 @@ bool Element::deserialize(YAML::Node node) {
         components.push_back(component);
     }
 
+    transform = (Transform2D*)getComponent("transform2D");
+
     return success;
 }
 
-void Element::init(Game *game,SDL_Renderer *renderer) {
-    this->game = game;
-    this->renderer = renderer;
-
+void Element::init() {
     for (Component *component : components) {
         component->init();
     }
@@ -68,10 +67,6 @@ void Element::render() {
 }
 
 
-
-
-
-
-
-
-
+Transform2D *Element::getTransform() const {
+    return transform;
+}

@@ -9,7 +9,6 @@
 #include <SDL_rect.h>
 #include "Component.h"
 
-
 class Transform2D : public Component {
 CREATE_METADATA(Transform2D);
 private:
@@ -24,7 +23,7 @@ public:
 
     void setPosition(SDL_Point position);
 
-    const SDL_Point &getScale() const;
+    const SDL_Point &getSize() const;
 
     void setSize(SDL_Point scale);
 

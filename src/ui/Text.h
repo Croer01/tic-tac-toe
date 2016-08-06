@@ -7,10 +7,10 @@
 
 
 #include <string>
-#include "UIElement.h"
 #include "../core/Texture.h"
+#include "../game-objects/components/Component.h"
 
-class Text : public UIElement {
+class Text : public Component {
     CREATE_METADATA(Text);
 
     std::string contentText;
@@ -20,9 +20,7 @@ class Text : public UIElement {
     void drawContentText();
 
 public:
-    Text(): UIElement(){};
-
-    Text(SDL_Renderer *renderer, SDL_Rect bounds);
+    Text();
 
     void setText(std::string text);
 

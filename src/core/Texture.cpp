@@ -4,6 +4,7 @@
 
 #include <SDL_image.h>
 #include "Texture.h"
+#include "../services/GameServices.h"
 
 Texture::Texture(SDL_Texture *texture, int width, int height) {
     //Initialize
@@ -25,16 +26,16 @@ int Texture::getHeight() {
     return mHeight;
 }
 
-void Texture::draw(SDL_Renderer *renderer, SDL_Rect size) {
-    SDL_RenderCopy(renderer, mTexture, NULL, &size);
+void Texture::draw(SDL_Rect size) {
+    SDL_RenderCopy(GameServices::getScreen()->gerRenderer(), mTexture, NULL, &size);
 }
 
-void Texture::draw(SDL_Renderer *renderer, SDL_Rect size, SDL_Rect clip, bool preserveAspect) {
+void Texture::draw(SDL_Rect size, SDL_Rect clip, bool preserveAspect) {
     if(preserveAspect){
         size.w = clip.w/clip.h * size.h;
     }
 
-    SDL_RenderCopy(renderer, mTexture, &clip, &size);
+    SDL_RenderCopy(GameServices::getScreen()->gerRenderer(), mTexture, &clip, &size);
 }
 
 

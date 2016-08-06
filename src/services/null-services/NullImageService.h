@@ -6,7 +6,7 @@
 #define TIC_TAC_TOE_NULLIMAGESERVICE_H
 
 
-#include "../ImageService.h"
+#include "../interfaces/ImageService.h"
 
 class NullImageService : public ImageService {
 public:

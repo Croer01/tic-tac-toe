@@ -9,9 +9,9 @@
 #include <map>
 #include <SDL_ttf.h>
 #include "../../core/Texture.h"
-#include "../ImageService.h"
+#include "../interfaces/ImageService.h"
 
-class SDLImageService : public ImageService {
+class SDLImageServiceImpl : public ImageService {
     SDL_Renderer *renderer;
     TTF_Font *font;
 
@@ -19,7 +19,7 @@ class SDLImageService : public ImageService {
 
     Texture * createTextureFromFileName(std::string filename);
 public:
-    SDLImageService(SDL_Renderer *renderer);
+    SDLImageServiceImpl(SDL_Renderer *renderer);
 
     virtual Texture *getTextureByFileName(std::string filename);
 

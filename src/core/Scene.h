@@ -7,11 +7,9 @@
 
 
 #include <SDL_render.h>
-#include "Game.h"
 #include "Object.h"
 #include "../game-objects/elements/Element.h"
 
-class Game;
 class Element;
 
 class Scene : public Object {
@@ -23,7 +21,7 @@ public:
 
     Scene() { };
 
-    void init(Game *game,SDL_Renderer *renderer);
+    void init();
 
     void update();
 

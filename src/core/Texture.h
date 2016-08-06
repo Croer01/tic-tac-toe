@@ -13,8 +13,8 @@ public:
     int getWidth();
     int getHeight();
 
-    void draw(SDL_Renderer *renderer, SDL_Rect clip);
-    void draw(SDL_Renderer *renderer, SDL_Rect clip, SDL_Rect size, bool preserveAspect = false);
+    void draw(SDL_Rect clip);
+    void draw(SDL_Rect clip, SDL_Rect size, bool preserveAspect = false);
 
 private:
     //The actual hardware texture

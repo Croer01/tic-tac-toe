@@ -1,21 +1,19 @@
 className: Scene
 name: main Game
 elements:
-  - className: Button
-    name: asdf
-    text: Return main menu
+  - className: WorldElement
+    name: table
     components:
       - className: Transform2D
         name: transform2D
         position:
-          x: 220
-          y: 190
+          x: 0
+          y: 0
         rotation:
           x: 0
           y: 0
         size:
-          x: 200
-          y: 100
-      - className: GoToScene
-        name: goToScene
-        sceneName: main Menu
+          x: 640
+          y: 480
+      - className: TableBoard
+        name: tableBoard

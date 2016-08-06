@@ -4,6 +4,7 @@
 
 #include "Button.h"
 #include "../services/GameServices.h"
+#include "../game-objects/components/Transform2D.h"
 
 INIT_METADATA(Button);
 
@@ -24,7 +25,7 @@ void Button::addOnClickHandler(std::function<void()> handler) {
 void Button::update() {
     Text::update();
     SDL_Point mousePos = GameServices::getInput()->getMousePosition();
-    SDL_Rect rect = transform->getRect();
+    SDL_Rect rect = element->getTransform()->getRect();
 
     if (SDL_PointInRect(&mousePos, &rect)) {
         if (!isInside) {
@@ -46,7 +47,8 @@ void Button::update() {
 
 
 void Button::render() {
-    const SDL_Rect &size = transform->getRect();
+    SDL_Renderer *renderer = GameServices::getScreen()->gerRenderer();
+    const SDL_Rect &size = element->getTransform()->getRect();
     if (isInside) {
         SDL_SetRenderDrawColor(renderer, 150, 150, 150, 255);
     } else {

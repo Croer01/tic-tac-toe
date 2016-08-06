@@ -4,14 +4,14 @@
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "SDLImageService.h"
+#include "SDLImageServiceImpl.h"
 
-SDLImageService::SDLImageService(SDL_Renderer *renderer) : ImageService(){
+SDLImageServiceImpl::SDLImageServiceImpl(SDL_Renderer *renderer) : ImageService(){
     this->renderer = renderer;
     this->font = TTF_OpenFont("assets/fonts/Pacifico.ttf", 28);
 }
 
-Texture * SDLImageService::getTextureByFileName(std::string filename) {
+Texture * SDLImageServiceImpl::getTextureByFileName(std::string filename) {
     Texture *texture = NULL;
 
     std::map<std::string, Texture *>::iterator iterator = textureLibrary.find(filename);
@@ -28,7 +28,7 @@ Texture * SDLImageService::getTextureByFileName(std::string filename) {
     return texture;
 }
 
-Texture * SDLImageService::createTextureFromString(std::string text) {
+Texture * SDLImageServiceImpl::createTextureFromString(std::string text) {
     Texture *texture = NULL;
 
     //Render text surface
@@ -56,7 +56,7 @@ Texture * SDLImageService::createTextureFromString(std::string text) {
     return texture;
 }
 
-Texture * SDLImageService::createTextureFromFileName(std::string filename) {
+Texture * SDLImageServiceImpl::createTextureFromFileName(std::string filename) {
     Texture *texture = NULL;
 
     //Load image at specified path

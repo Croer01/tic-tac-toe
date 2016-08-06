@@ -9,10 +9,11 @@
 #include <SDL_ttf.h>
 #include "Game.h"
 #include "../services/GameServices.h"
-#include "../services/implementations/KeyboardInputService.h"
-#include "../services/implementations/SDLImageService.h"
-#include "../services/implementations/SDLCursorService.h"
+#include "../services/implementations/KeyboardInputServiceImpl.h"
+#include "../services/implementations/SDLImageServiceImpl.h"
+#include "../services/implementations/SDLCursorServiceImpl.h"
 #include "../serialization/Serializer.h"
+#include "../services/implementations/ScreenServiceImpl.h"
 
 Game::Game() {
     window = NULL;
@@ -39,13 +40,12 @@ bool Game::init(int screenWidth, int screenHeight) {
                    createWindow(screenWidth, screenHeight) &&
                    createRenderer() &&
                    initSDL_ImageModule() &&
-                   initSDL_TTF_Module() &&
-                   initSceneManager();
+                   initSDL_TTF_Module();
 
     initGameServices();
 
     reset_button = Serializer::load<Element>(std::string(SDL_GetBasePath()) + "/Data/save_button.yaml");
-    reset_button->init(this, renderer);
+    reset_button->init();
     return success;
 }
 
@@ -114,17 +114,11 @@ bool Game::initSDL_TTF_Module() {
 }
 
 void Game::initGameServices() {
-    GameServices::provide(new KeyboardInputService());
-    GameServices::provide(new SDLImageService(renderer));
-    GameServices::provide(new SDLCursorService());
-}
-
-bool Game::initSceneManager() {
-    bool success = true;
-
-    sceneManager = new SceneManager("Data/Scenes", this, renderer);
-
-    return success;
+    GameServices::provide(new KeyboardInputServiceImpl());
+    GameServices::provide(new SDLImageServiceImpl(renderer));
+    GameServices::provide(new SDLCursorServiceImpl());
+    GameServices::provide(new SceneServiceImpl());
+    GameServices::provide(new ScreenServiceImpl(renderer));
 }
 //endregion
 
@@ -134,7 +128,7 @@ void Game::update() {
     if (GameServices::getInput()->quitPressed())
         exit();
 
-    sceneManager->update();
+    GameServices::getScenes()->update();
     reset_button->update();
 }
 
@@ -143,7 +137,7 @@ void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
-    sceneManager->render();
+    GameServices::getScenes()->render();
     reset_button->render();
     //Update screen
     SDL_RenderPresent(renderer);
@@ -157,21 +151,6 @@ void Game::exit() {
     running = false;
 }
 
-bool Game::changeScene(std::string sceneName) {
-    return sceneManager->changeScene(sceneName);
-}
-
-void Game::changeSceneInSafeMode() {
-    sceneManager->initializeNextSceneInSafeMode();
-}
-
-void Game::reloadScene() {
-    sceneManager->changeScene(sceneManager->getCurrentScene()->getName());
-}
-
-Scene *Game::getCurrentScene() const {
-    return sceneManager->getCurrentScene();
-}
 
 
 

@@ -3,9 +3,9 @@
 //
 
 #include <SDL_events.h>
-#include "KeyboardInputService.h"
+#include "KeyboardInputServiceImpl.h"
 
-KeyboardInputService::KeyboardInputService() : InputService(){
+KeyboardInputServiceImpl::KeyboardInputServiceImpl() : InputService(){
     quit = false;
     mousePosition.x = -1;
     mousePosition.y = -1;
@@ -13,7 +13,7 @@ KeyboardInputService::KeyboardInputService() : InputService(){
 
 //public accessors
 
-void KeyboardInputService::update() {
+void KeyboardInputServiceImpl::update() {
     reset();
 
     SDL_Event event;
@@ -66,35 +66,35 @@ void KeyboardInputService::update() {
     }
 }
 
-bool KeyboardInputService::quitPressed() {
+bool KeyboardInputServiceImpl::quitPressed() {
     return quit;
 }
 
-bool KeyboardInputService::isKeyUp(SDL_Keycode keyCode) {
+bool KeyboardInputServiceImpl::isKeyUp(SDL_Keycode keyCode) {
     return keyboardState[keyCode] == UP;
 }
 
-bool KeyboardInputService::isKeyDown(SDL_Keycode keyCode) {
+bool KeyboardInputServiceImpl::isKeyDown(SDL_Keycode keyCode) {
     return keyboardState[keyCode] == DOWN;
 }
 
-bool KeyboardInputService::isMouseButtonUp(MOUSE_BUTTON mouseButton) {
+bool KeyboardInputServiceImpl::isMouseButtonUp(MOUSE_BUTTON mouseButton) {
     return mouseState[mouseButton] == UP;
 }
 
-bool KeyboardInputService::isMouseButtonDown(MOUSE_BUTTON mouseButton) {
+bool KeyboardInputServiceImpl::isMouseButtonDown(MOUSE_BUTTON mouseButton) {
     return mouseState[mouseButton] == DOWN;
 }
 
-SDL_Point KeyboardInputService::getMousePosition() {
+SDL_Point KeyboardInputServiceImpl::getMousePosition() {
     SDL_GetMouseState(&mousePosition.x, &mousePosition.y);
     return mousePosition;
 }
 
 //private implementations
 
-void KeyboardInputService::reset() {
-    for (std::pair<const int, KeyboardInputService::InputState> &iterator : keyboardState) {
+void KeyboardInputServiceImpl::reset() {
+    for (std::pair<const int, KeyboardInputServiceImpl::InputState> &iterator : keyboardState) {
         iterator.second = NONE;
     }
     for (int i = 0; i < MOUSE_BUTTON::MAX_BUTTON; ++i) {

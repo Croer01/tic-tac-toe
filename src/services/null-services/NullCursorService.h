@@ -5,7 +5,7 @@
 #ifndef TIC_TAC_TOE_NULLCURSORSERVICE_H
 #define TIC_TAC_TOE_NULLCURSORSERVICE_H
 
-#include "../CursorService.h"
+#include "../interfaces/CursorService.h"
 
 class NullCursorService: public CursorService {
 public:

@@ -8,12 +8,12 @@
 
 #include <SDL_mouse.h>
 #include <map>
-#include "../CursorService.h"
+#include "../interfaces/CursorService.h"
 
-class SDLCursorService :public CursorService{
+class SDLCursorServiceImpl :public CursorService{
     std::map<SDL_SystemCursor, SDL_Cursor *> cursors;
 public:
-    virtual ~SDLCursorService();
+    virtual ~SDLCursorServiceImpl();
 
     virtual void setCursor(SDL_SystemCursor cursor);
 };

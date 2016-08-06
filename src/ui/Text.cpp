@@ -4,10 +4,11 @@
 
 #include "Text.h"
 #include "../services/GameServices.h"
+#include "../game-objects/components/Transform2D.h"
 
 INIT_METADATA(Text);
 
-Text::Text(SDL_Renderer *renderer, SDL_Rect bounds) : UIElement(renderer, bounds) {
+Text::Text() : Component() {
     contentText = "";
 }
 
@@ -31,21 +32,21 @@ void Text::drawContentText() {
 }
 
 void Text::render() {
-    UIElement::render();
+    Component::render();
     if (textUpdated) {
         drawContentText();
     }
     if (textToRender != NULL)
-        textToRender->draw(renderer, transform->getRect());
+        textToRender->draw(element->getTransform()->getRect());
 }
 
 void Text::serialize(YAML::Node node) const{
-    UIElement::serialize(node);
+    Component::serialize(node);
     node["text"] = contentText;
 }
 
 bool Text::deserialize(YAML::Node node) {
-    bool success = UIElement::deserialize(node);
+    bool success = Component::deserialize(node);
     setText(node["text"].as<std::string>());
 
     return success;

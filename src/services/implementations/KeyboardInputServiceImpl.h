@@ -7,9 +7,9 @@
 
 
 #include <map>
-#include "../InputService.h"
+#include "../interfaces/InputService.h"
 
-class KeyboardInputService : public InputService {
+class KeyboardInputServiceImpl : public InputService {
 
     bool quit;
     InputState mouseState[3];
@@ -19,7 +19,7 @@ class KeyboardInputService : public InputService {
     void reset();
 
 public:
-    KeyboardInputService();
+    KeyboardInputServiceImpl();
 
     virtual void update();
 

@@ -4,6 +4,7 @@
 
 #include "GoToScene.h"
 #include "../ui/Button.h"
+#include "../services/GameServices.h"
 
 INIT_METADATA(GoToScene);
 
@@ -11,7 +12,7 @@ void GoToScene::init() {
     Component::init();
     Button *button = (Button *) element;
     button->addOnClickHandler([=]() {
-        element->game->changeScene(sceneName);
+        GameServices::getScenes()->changeScene(sceneName);
     });
 }
 

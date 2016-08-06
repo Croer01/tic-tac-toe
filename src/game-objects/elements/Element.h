@@ -8,16 +8,15 @@
 
 #include <vector>
 #include "../../core/Object.h"
-#include "../../core/Game.h"
-#include "../components/Component.h"
 
-class Game;
+class Transform2D;
+class Component;
+
 class Element : public Object {
+
 CREATE_METADATA(Element);
-protected:
     std::vector<Component *> components;
-    Game *game;
-    SDL_Renderer *renderer;
+    Transform2D *transform;
 public:
     Element() :Object(){ };
 
@@ -27,12 +26,13 @@ public:
 
     void addComponent(Component *component);
 
+    Transform2D * getTransform() const;
+
     virtual void serialize(YAML::Node node) const;
 
     virtual bool deserialize(YAML::Node node);
 
-
-    virtual void init(Game *game,SDL_Renderer *renderer);
+    virtual void init();
 
     virtual void update();
 

@@ -22,9 +22,9 @@ bool Scene::deserialize(YAML::Node node) {
     return success;
 }
 
-void Scene::init(Game *game,SDL_Renderer *renderer) {
+void Scene::init() {
     for (Element *element: elements) {
-        element->init(game,renderer);
+        element->init();
     }
 }
 
