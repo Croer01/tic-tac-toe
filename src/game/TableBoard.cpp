@@ -4,8 +4,7 @@
 
 #include "TableBoard.h"
 #include "../services/GameServices.h"
-#include "../game-objects/elements/Element.h"
-#include "../game-objects/elements/WorldElement.h"
+#include "../elements/WorldElement.h"
 
 INIT_METADATA(TableBoard);
 

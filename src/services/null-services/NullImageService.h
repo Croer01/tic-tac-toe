@@ -14,7 +14,7 @@ public:
 
     virtual void configManager(SDL_Renderer *renderer) { };
 
-    virtual Texture *createTextureFromString(std::string text) { return NULL; };
+    virtual Texture *createTextureFromString(Font* font,std::string text) { return NULL; };
 };
 
 

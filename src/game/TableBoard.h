@@ -8,7 +8,7 @@
 
 #include <SDL_render.h>
 #include "Cell.h"
-#include "../game-objects/components/Component.h"
+#include "../components/Component.h"
 
 class TableBoard : public Component {
 CREATE_METADATA(TableBoard);

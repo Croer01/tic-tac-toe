@@ -8,7 +8,7 @@
 
 #include <SDL_log.h>
 #include <string>
-#include "../../core/Object.h"
+#include "../core/Object.h"
 #include "../elements/Element.h"
 
 class Component : public Object {

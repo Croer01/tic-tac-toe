@@ -17,7 +17,6 @@ class Element;
 class Scene;
 
 class Game {
-    Element* reset_button;
     bool initSDL_ImageModule();
 
     bool createRenderer();

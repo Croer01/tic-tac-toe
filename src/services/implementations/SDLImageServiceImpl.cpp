@@ -8,7 +8,6 @@
 
 SDLImageServiceImpl::SDLImageServiceImpl(SDL_Renderer *renderer) : ImageService(){
     this->renderer = renderer;
-    this->font = TTF_OpenFont("assets/fonts/Pacifico.ttf", 28);
 }
 
 Texture * SDLImageServiceImpl::getTextureByFileName(std::string filename) {
@@ -28,11 +27,11 @@ Texture * SDLImageServiceImpl::getTextureByFileName(std::string filename) {
     return texture;
 }
 
-Texture * SDLImageServiceImpl::createTextureFromString(std::string text) {
+Texture * SDLImageServiceImpl::createTextureFromString(Font* font,std::string text) {
     Texture *texture = NULL;
 
     //Render text surface
-    SDL_Surface *loadedSurface = TTF_RenderText_Blended(font, text.c_str(), {0, 0, 0});
+    SDL_Surface *loadedSurface = TTF_RenderText_Blended(font->getFont(), text.c_str(), {0, 0, 0});
     if (loadedSurface == NULL) {
         SDL_LogError(SDL_LOG_CATEGORY_RENDER,"Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
     }

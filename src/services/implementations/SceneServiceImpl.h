@@ -19,6 +19,8 @@ class SceneServiceImpl : public SceneService {
 
     void addScene(Scene *scene);
 
+    void load();
+
 public:
     SceneServiceImpl();
 

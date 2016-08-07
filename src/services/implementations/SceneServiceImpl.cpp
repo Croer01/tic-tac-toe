@@ -4,13 +4,14 @@
 
 #include "SceneServiceImpl.h"
 #include "../../serialization/Serializer.h"
+#include "../GameServices.h"
 
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
 #include <SDL_filesystem.h>
 #include <SDL_log.h>
 
-SceneServiceImpl::SceneServiceImpl() {
+void SceneServiceImpl::load(){
     currentScene = NULL;
     nextScene = NULL;
 
@@ -32,6 +33,10 @@ SceneServiceImpl::SceneServiceImpl() {
 
         nextScene = scenes[0];
     }
+}
+
+SceneServiceImpl::SceneServiceImpl() {
+    load();
 }
 
 Scene *SceneServiceImpl::getCurrentScene() {
@@ -74,6 +79,17 @@ void SceneServiceImpl::addScene(Scene *scene) {
 void SceneServiceImpl::update() {
     if (currentScene != NULL)
         currentScene->update();
+
+    if(GameServices::getInput()->isKeyDown(SDLK_r)){
+        currentScene = NULL;
+        nextScene = NULL;
+        for(Scene* scene:scenes){
+            delete scene;
+        }
+        SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION,"reload all scenes");
+        scenes.clear();
+        load();
+    }
 }
 
 void SceneServiceImpl::render() {

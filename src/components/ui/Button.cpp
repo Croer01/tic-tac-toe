@@ -3,8 +3,8 @@
 //
 
 #include "Button.h"
-#include "../services/GameServices.h"
-#include "../game-objects/components/Transform2D.h"
+#include "../../services/GameServices.h"
+#include "../../components/Transform2D.h"
 
 INIT_METADATA(Button);
 

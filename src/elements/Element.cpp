@@ -4,7 +4,7 @@
 
 #include <algorithm>
 #include "Element.h"
-#include "../../serialization/Serializer.h"
+#include "../serialization/Serializer.h"
 #include "../components/Transform2D.h"
 
 INIT_METADATA(Element);

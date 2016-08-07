@@ -7,15 +7,17 @@
 
 
 #include <string>
-#include "../core/Texture.h"
-#include "../game-objects/components/Component.h"
+#include "../../core/Texture.h"
+#include "../Component.h"
+#include "../Font.h"
 
 class Text : public Component {
-    CREATE_METADATA(Text);
+CREATE_METADATA(Text);
 
     std::string contentText;
     Texture *textToRender;
     bool textUpdated;
+    Font *fontComponent;
 
     void drawContentText();
 
@@ -25,6 +27,8 @@ public:
     void setText(std::string text);
 
     const std::string getText();
+
+    virtual void init();
 
     virtual void render();
 

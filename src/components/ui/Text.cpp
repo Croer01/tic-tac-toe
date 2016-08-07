@@ -3,8 +3,8 @@
 //
 
 #include "Text.h"
-#include "../services/GameServices.h"
-#include "../game-objects/components/Transform2D.h"
+#include "../../services/GameServices.h"
+#include "../Transform2D.h"
 
 INIT_METADATA(Text);
 
@@ -27,8 +27,13 @@ const std::string Text::getText() {
 }
 
 void Text::drawContentText() {
-    textToRender = GameServices::getImage()->createTextureFromString(contentText);
+    textToRender = GameServices::getImage()->createTextureFromString(fontComponent,contentText);
     textUpdated = false;
+}
+
+void Text::init() {
+    Component::init();
+    fontComponent = (Font*)element->getComponent("font");
 }
 
 void Text::render() {

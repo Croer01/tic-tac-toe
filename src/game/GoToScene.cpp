@@ -3,7 +3,7 @@
 //
 
 #include "GoToScene.h"
-#include "../ui/Button.h"
+#include "../components/ui/Button.h"
 #include "../services/GameServices.h"
 
 INIT_METADATA(GoToScene);

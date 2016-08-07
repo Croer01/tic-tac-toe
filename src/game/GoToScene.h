@@ -6,7 +6,7 @@
 #define TIC_TAC_TOE_GOTOSCENE_H
 
 
-#include "../game-objects/components/Component.h"
+#include "../components/Component.h"
 
 class GoToScene : public Component {
 CREATE_METADATA(GoToScene);

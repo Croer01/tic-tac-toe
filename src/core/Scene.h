@@ -8,7 +8,7 @@
 
 #include <SDL_render.h>
 #include "Object.h"
-#include "../game-objects/elements/Element.h"
+#include "../elements/Element.h"
 
 class Element;
 

@@ -8,6 +8,7 @@
 
 #include <string>
 #include "../../core/Texture.h"
+#include "../../components/Font.h"
 
 class ImageService {
 public:
@@ -15,7 +16,7 @@ public:
 
     virtual Texture *getTextureByFileName(std::string filename) = 0;
 
-    virtual Texture *createTextureFromString(std::string text) = 0;
+    virtual Texture *createTextureFromString(Font* font, std::string text) = 0;
 };
 
 

@@ -10,10 +10,10 @@
 #include <SDL_ttf.h>
 #include "../../core/Texture.h"
 #include "../interfaces/ImageService.h"
+#include "../../components/Font.h"
 
 class SDLImageServiceImpl : public ImageService {
     SDL_Renderer *renderer;
-    TTF_Font *font;
 
     std::map<std::string, Texture *> textureLibrary;
 
@@ -23,7 +23,7 @@ public:
 
     virtual Texture *getTextureByFileName(std::string filename);
 
-    virtual Texture *createTextureFromString(std::string text);
+    virtual Texture *createTextureFromString(Font* font,std::string text);
 };
 
 

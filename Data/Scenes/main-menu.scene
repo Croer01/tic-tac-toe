@@ -8,7 +8,7 @@ elements:
         name: transform2D
         position:
           x: 220
-          y: 190
+          y: 220
         rotation:
           x: 0
           y: 0
@@ -21,3 +21,28 @@ elements:
       - className: Button
         name: button
         text: Start Game
+      - className: Font
+        name: font
+        fontFile: assets/fonts/Pacifico.ttf
+        size: 40
+  - className: WorldElement
+    name: worldElement
+    components:
+      - className: Transform2D
+        name: transform2D
+        position:
+          x: 20
+          y: 65
+        rotation:
+          x: 0
+          y: 0
+        size:
+          x: 600
+          y: 100
+      - className: Text
+        name: text
+        text: Tic tac toe
+      - className: Font
+        name: font
+        fontFile: assets/fonts/Pacifico.ttf
+        size: 72

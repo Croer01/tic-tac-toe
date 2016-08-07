@@ -12,7 +12,6 @@
 #include "../services/implementations/KeyboardInputServiceImpl.h"
 #include "../services/implementations/SDLImageServiceImpl.h"
 #include "../services/implementations/SDLCursorServiceImpl.h"
-#include "../serialization/Serializer.h"
 #include "../services/implementations/ScreenServiceImpl.h"
 
 Game::Game() {
@@ -44,8 +43,6 @@ bool Game::init(int screenWidth, int screenHeight) {
 
     initGameServices();
 
-    reset_button = Serializer::load<Element>(std::string(SDL_GetBasePath()) + "/Data/save_button.yaml");
-    reset_button->init();
     return success;
 }
 
@@ -129,7 +126,6 @@ void Game::update() {
         exit();
 
     GameServices::getScenes()->update();
-    reset_button->update();
 }
 
 void Game::render() {
@@ -138,7 +134,7 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     GameServices::getScenes()->render();
-    reset_button->render();
+
     //Update screen
     SDL_RenderPresent(renderer);
 }

@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "../../core/Object.h"
+#include "../core/Object.h"
 
 class Transform2D;
 class Component;
