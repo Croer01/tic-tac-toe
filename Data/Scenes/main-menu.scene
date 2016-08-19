@@ -46,3 +46,22 @@ elements:
         name: font
         fontFile: assets/fonts/Pacifico.ttf
         size: 72
+  - className: WorldElement
+    name: worldElement
+    components:
+      - className: Transform2D
+        name: transform2D
+        position:
+          x: 20
+          y: 65
+        rotation:
+          x: 0
+          y: 0
+        size:
+          x: 600
+          y: 100
+      - className: Image
+        name: image
+        fontFile: assets/images/tic-tac-toe.png
+        width: 600
+        height: 271
